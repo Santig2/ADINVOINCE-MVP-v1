@@ -1,4 +1,4 @@
-"use client"
+tsx_code = """\"\"\"use client\"\"\"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -56,7 +56,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 const Sparkline = ({ color, data, className }: { color: string, data: number[], className?: string }) => {
   const max = Math.max(...data, 1);
   const min = Math.min(...data, 0);
-  const range = max - min || 1;
+  const range = max - min;
   const points = data.map((d, i) => `${(i / (data.length - 1)) * 100},${100 - ((d - min) / range) * 80}`).join(" ");
   return (
     <svg className={cn("absolute bottom-0 left-0 w-full h-1/2 opacity-20 pointer-events-none", className)} preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -231,7 +231,7 @@ function DashboardContent() {
             
             <div className="relative inline-block">
               {/* Subtle animated background glow */}
-              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full animate-pulse" />
+              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full animate-pulse-slow" />
               <h1 id="dashboard-total-invoices" className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-foreground drop-shadow-sm font-mono relative z-10">
                 <AnimatedCounter value={totalRevenue + pendingRevenue} prefix="$" decimals={0} />
               </h1>
@@ -332,28 +332,28 @@ function DashboardContent() {
             <Link href="/invoices/new" className="flex flex-col items-center gap-2.5 group shrink-0">
               <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-accent-warm/20 to-accent-warm/5 border border-accent-warm/20 text-accent-warm flex items-center justify-center group-hover:bg-accent-warm group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(255,100,50,0.3)] group-hover:shadow-[0_12px_24px_-6px_rgba(255,100,50,0.6)] group-hover:-translate-y-1 group-active:scale-95 relative overflow-hidden">
                 <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <FileText className="h-6 w-6 sm:h-7 sm:w-7 relative z-10" />
+                <FileText className="h-6 w-6 sm:h-7 sm:w-7 relative z-10 group-hover:animate-bounce-subtle" />
               </div>
               <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Invoice</span>
             </Link>
             
             <Link href="/quotes/new" className="flex flex-col items-center gap-2.5 group shrink-0">
               <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-500/5 border border-orange-500/20 text-orange-500 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(249,115,22,0.3)] group-hover:shadow-[0_12px_20px_-6px_rgba(249,115,22,0.5)] group-hover:-translate-y-1 group-active:scale-95">
-                <FileCheck className="h-6 w-6 sm:h-7 sm:w-7" />
+                <FileCheck className="h-6 w-6 sm:h-7 sm:w-7 group-hover:animate-bounce-subtle" />
               </div>
               <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Estimate</span>
             </Link>
 
             <Link href="/expenses" className="flex flex-col items-center gap-2.5 group shrink-0">
               <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-500/5 border border-green-500/20 text-green-500 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(34,197,94,0.3)] group-hover:shadow-[0_12px_20px_-6px_rgba(34,197,94,0.5)] group-hover:-translate-y-1 group-active:scale-95">
-                <DollarSign className="h-6 w-6 sm:h-7 sm:w-7" />
+                <DollarSign className="h-6 w-6 sm:h-7 sm:w-7 group-hover:animate-bounce-subtle" />
               </div>
               <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Expense</span>
             </Link>
 
             <Link href="/clients" className="flex flex-col items-center gap-2.5 group shrink-0">
               <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-500/5 border border-purple-500/20 text-purple-500 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(168,85,247,0.3)] group-hover:shadow-[0_12px_20px_-6px_rgba(168,85,247,0.5)] group-hover:-translate-y-1 group-active:scale-95">
-                <Users className="h-6 w-6 sm:h-7 sm:w-7" />
+                <Users className="h-6 w-6 sm:h-7 sm:w-7 group-hover:animate-bounce-subtle" />
               </div>
               <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Client</span>
             </Link>
@@ -623,3 +623,6 @@ export default function Dashboard() {
     </Suspense>
   )
 }
+\"\"\"
+with open("c:/Users/santi/Desktop/codigo/ADINVOINCE MVP v1/app/page.tsx", "w", encoding="utf-8") as f:
+    f.write(tsx_code)

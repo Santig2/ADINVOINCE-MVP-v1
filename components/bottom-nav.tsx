@@ -43,15 +43,15 @@ const mainNavItems = [
 ]
 
 const moreNavItems = [
-  { name: "Advances", href: "/advances", icon: ClipboardList },
-  { name: "Contracts", href: "/contracts", icon: PenTool },
-  { name: "Subscriptions", href: "/subscriptions", icon: CalendarClock },
-  { name: "Payments", href: "/payments", icon: CreditCard },
-  { name: "Expenses", href: "/expenses", icon: Receipt },
-  { name: "Catalog", href: "/catalog", icon: Package },
-  { name: "Reminders", href: "/reminders", icon: Bell },
-  { name: "Ask Me How", href: "/ask-me-how", icon: HelpCircle },
-  { name: "Settings", href: "/configuration", icon: Settings },
+  { name: "Advances", href: "/advances", icon: ClipboardList, colorClass: "from-cyan-500/10 to-cyan-500/5 border-cyan-500/20 text-cyan-500 group-hover:from-cyan-500/20 group-hover:to-cyan-500/10 group-hover:shadow-cyan-500/25", textHover: "group-hover:text-cyan-500" },
+  { name: "Contracts", href: "/contracts", icon: PenTool, colorClass: "from-indigo-500/10 to-indigo-500/5 border-indigo-500/20 text-indigo-500 group-hover:from-indigo-500/20 group-hover:to-indigo-500/10 group-hover:shadow-indigo-500/25", textHover: "group-hover:text-indigo-500" },
+  { name: "Subscriptions", href: "/subscriptions", icon: CalendarClock, colorClass: "from-emerald-500/10 to-emerald-500/5 border-emerald-500/20 text-emerald-500 group-hover:from-emerald-500/20 group-hover:to-emerald-500/10 group-hover:shadow-emerald-500/25", textHover: "group-hover:text-emerald-500" },
+  { name: "Payments", href: "/payments", icon: CreditCard, colorClass: "from-amber-500/10 to-amber-500/5 border-amber-500/20 text-amber-500 group-hover:from-amber-500/20 group-hover:to-amber-500/10 group-hover:shadow-amber-500/25", textHover: "group-hover:text-amber-500" },
+  { name: "Expenses", href: "/expenses", icon: Receipt, colorClass: "from-rose-500/10 to-rose-500/5 border-rose-500/20 text-rose-500 group-hover:from-rose-500/20 group-hover:to-rose-500/10 group-hover:shadow-rose-500/25", textHover: "group-hover:text-rose-500" },
+  { name: "Catalog", href: "/catalog", icon: Package, colorClass: "from-blue-500/10 to-blue-500/5 border-blue-500/20 text-blue-500 group-hover:from-blue-500/20 group-hover:to-blue-500/10 group-hover:shadow-blue-500/25", textHover: "group-hover:text-blue-500" },
+  { name: "Reminders", href: "/reminders", icon: Bell, colorClass: "from-orange-500/10 to-orange-500/5 border-orange-500/20 text-orange-500 group-hover:from-orange-500/20 group-hover:to-orange-500/10 group-hover:shadow-orange-500/25", textHover: "group-hover:text-orange-500" },
+  { name: "Ask Me How", href: "/ask-me-how", icon: HelpCircle, colorClass: "from-purple-500/10 to-purple-500/5 border-purple-500/20 text-purple-500 group-hover:from-purple-500/20 group-hover:to-purple-500/10 group-hover:shadow-purple-500/25", textHover: "group-hover:text-purple-500" },
+  { name: "Settings", href: "/configuration", icon: Settings, colorClass: "from-slate-500/10 to-slate-500/5 border-slate-500/20 text-slate-500 group-hover:from-slate-500/20 group-hover:to-slate-500/10 group-hover:shadow-slate-500/25", textHover: "group-hover:text-slate-500" },
 ]
 
 export function BottomNav() {
@@ -206,11 +206,14 @@ export function BottomNav() {
                   onClick={() => { triggerHaptic("light"); setIsMoreMenuOpen(false) }}
                   className="flex flex-col items-center gap-2 group"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-gradient-to-br from-primary-light/10 to-primary/5 backdrop-blur-xl border border-primary/20 shadow-[0_4px_12px_rgba(0,117,135,0.1)] group-hover:shadow-[0_8px_20px_rgba(0,117,135,0.25)] group-hover:-translate-y-1 group-hover:from-primary-light/20 group-hover:to-primary/10 transition-all duration-300 relative overflow-hidden">
+                  <div className={cn(
+                    "flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-gradient-to-br backdrop-blur-xl border shadow-[0_4px_12px_rgba(0,0,0,0.05)] group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden",
+                    item.colorClass
+                  )}>
                     <div className="absolute inset-0 bg-white/20 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <item.icon className="h-6 w-6 text-primary drop-shadow-sm group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <item.icon className="h-6 w-6 drop-shadow-sm group-hover:scale-110 transition-transform duration-300 relative z-10" />
                   </div>
-                  <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors text-center leading-tight">
+                  <span className={cn("text-xs font-semibold text-foreground transition-colors text-center leading-tight", item.textHover)}>
                     {item.name}
                   </span>
                 </Link>

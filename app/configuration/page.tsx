@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
   Dialog,
@@ -23,6 +23,7 @@ import {
 import { Upload, Save, Plus, Trash2, Building2, User, FileText, SettingsIcon, CheckCircle2, CreditCard, Wallet, Send, Smartphone, Download, Database, TableProperties, FileSpreadsheet } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
+import { useTheme } from "@/components/theme-provider"
 
 type UserConfig = {
   fullName: string
@@ -82,6 +83,7 @@ type CompanyInvoiceColors = {
 
 
 export default function ConfigurationPage() {
+  const { theme, setTheme } = useTheme()
   const { toast } = useToast()
   const profilePhotoRef = useRef<HTMLInputElement>(null)
   const companyLogoRefs = useRef<{ [key: number]: HTMLInputElement | null }>({})
@@ -462,74 +464,24 @@ export default function ConfigurationPage() {
           <p className="text-muted-foreground mt-1">Manage your account, company, and invoice settings</p>
         </div>
 
-        <Tabs defaultValue="user" className="flex flex-col lg:flex-row gap-6 lg:gap-8 max-w-6xl mx-auto mt-4">
-          <TabsList className="flex flex-col h-auto w-full lg:w-72 bg-transparent gap-3 justify-start items-stretch p-0 shrink-0">
-            <TabsTrigger id="config-profile" value="user" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
-                <User className="h-5 w-5 drop-shadow-sm" />
-              </div>
-              <div className="flex flex-col items-start text-left">
-                <span className="font-semibold text-foreground text-base">User Profile</span>
-                <span className="text-xs text-muted-foreground font-normal mt-0.5">Personal details & preferences</span>
-              </div>
-            </TabsTrigger>
-            
-            <TabsTrigger id="config-company" value="company" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
-                <Building2 className="h-5 w-5 drop-shadow-sm" />
-              </div>
-              <div className="flex flex-col items-start text-left">
-                <span className="font-semibold text-foreground text-base">Company</span>
-                <span className="text-xs text-muted-foreground font-normal mt-0.5">Business info & templates</span>
-              </div>
-            </TabsTrigger>
-            
-            <TabsTrigger value="invoices" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
-                <FileText className="h-5 w-5 drop-shadow-sm" />
-              </div>
-              <div className="flex flex-col items-start text-left">
-                <span className="font-semibold text-foreground text-base">Invoices</span>
-                <span className="text-xs text-muted-foreground font-normal mt-0.5">Numbering & auto-reminders</span>
-              </div>
-            </TabsTrigger>
-            
-            <TabsTrigger id="config-billing" value="payments" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
-                <CreditCard className="h-5 w-5 drop-shadow-sm" />
-              </div>
-              <div className="flex flex-col items-start text-left">
-                <span className="font-semibold text-foreground text-base">Payments</span>
-                <span className="text-xs text-muted-foreground font-normal mt-0.5">Payment gateways & methods</span>
-              </div>
-            </TabsTrigger>
-            
-            <TabsTrigger id="config-notifications" value="general" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
-                <SettingsIcon className="h-5 w-5 drop-shadow-sm" />
-              </div>
-              <div className="flex flex-col items-start text-left">
-                <span className="font-semibold text-foreground text-base">General</span>
-                <span className="text-xs text-muted-foreground font-normal mt-0.5">App settings & data export</span>
-              </div>
-            </TabsTrigger>
+        <Accordion type="single" collapsible defaultValue="user" className="flex flex-col gap-4 max-w-4xl mx-auto mt-4 pb-20">
 
-            <TabsTrigger id="config-data" value="data" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
-                <Database className="h-5 w-5 drop-shadow-sm" />
+          {/* User Profile Configuration */}
+          <AccordionItem value="user" className="border border-white/10 dark:border-white/5 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl shadow-sm overflow-hidden data-[state=open]:border-blue-500/30 data-[state=open]:shadow-md data-[state=open]:shadow-blue-500/10 transition-all duration-300">
+            <AccordionTrigger id="config-user" className="px-6 py-4 hover:bg-card/50 hover:no-underline group transition-all [&[data-state=open]>svg]:rotate-180">
+              <div className="flex items-center gap-4 text-left flex-1">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-500/5 border border-blue-500/20 text-blue-500 flex items-center justify-center shrink-0 group-data-[state=open]:scale-110 group-data-[state=open]:bg-blue-500/20 transition-all duration-300 shadow-inner">
+                  <User className="h-5 w-5 drop-shadow-sm" />
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span className="font-semibold text-foreground text-base group-hover:text-blue-500 transition-colors">User Profile</span>
+                  <span className="text-xs text-muted-foreground font-normal mt-0.5">Personal details & preferences</span>
+                </div>
               </div>
-              <div className="flex flex-col items-start text-left">
-                <span className="font-semibold text-foreground text-base">Backup</span>
-                <span className="text-xs text-muted-foreground font-normal mt-0.5">Export your data</span>
-              </div>
-            </TabsTrigger>
-          </TabsList>
-
-          <div className="flex-1 min-w-0 pb-20 lg:pb-0">
-
-          {/* User Configuration */}
-          <TabsContent value="user" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6 pt-2">
+              <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                <Card>
               <CardHeader>
                 <CardTitle>Personal Information</CardTitle>
                 <CardDescription>Update your personal details and preferences</CardDescription>
@@ -648,11 +600,26 @@ export default function ConfigurationPage() {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
           {/* Company Configuration */}
-          <TabsContent value="company" className="mt-0 space-y-6 focus-visible:outline-none">
-            <div className="flex justify-between items-center">
+          <AccordionItem value="company" className="border border-white/10 dark:border-white/5 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl shadow-sm overflow-hidden data-[state=open]:border-indigo-500/30 data-[state=open]:shadow-md data-[state=open]:shadow-indigo-500/10 transition-all duration-300">
+            <AccordionTrigger id="config-company" className="px-6 py-4 hover:bg-card/50 hover:no-underline group transition-all [&[data-state=open]>svg]:rotate-180">
+              <div className="flex items-center gap-4 text-left flex-1">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-500/10 to-indigo-500/5 border border-indigo-500/20 text-indigo-500 flex items-center justify-center shrink-0 group-data-[state=open]:scale-110 group-data-[state=open]:bg-indigo-500/20 transition-all duration-300 shadow-inner">
+                  <Building2 className="h-5 w-5 drop-shadow-sm" />
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span className="font-semibold text-foreground text-base group-hover:text-indigo-500 transition-colors">Company</span>
+                  <span className="text-xs text-muted-foreground font-normal mt-0.5">Business info & templates</span>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6 pt-2">
+              <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                <div className="flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">Your Companies</h3>
                 <p className="text-sm text-muted-foreground">Manage multiple companies and their invoice templates</p>
@@ -881,11 +848,26 @@ export default function ConfigurationPage() {
                 </Card>
               ))}
             </div>
-          </TabsContent>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-          {/* Invoice Configuration */}
-          <TabsContent value="invoices" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card>
+          {/* Invoices Configuration */}
+          <AccordionItem value="invoices" className="border border-white/10 dark:border-white/5 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl shadow-sm overflow-hidden data-[state=open]:border-emerald-500/30 data-[state=open]:shadow-md data-[state=open]:shadow-emerald-500/10 transition-all duration-300">
+            <AccordionTrigger id="config-invoices" className="px-6 py-4 hover:bg-card/50 hover:no-underline group transition-all [&[data-state=open]>svg]:rotate-180">
+              <div className="flex items-center gap-4 text-left flex-1">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 text-emerald-500 flex items-center justify-center shrink-0 group-data-[state=open]:scale-110 group-data-[state=open]:bg-emerald-500/20 transition-all duration-300 shadow-inner">
+                  <FileText className="h-5 w-5 drop-shadow-sm" />
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span className="font-semibold text-foreground text-base group-hover:text-emerald-500 transition-colors">Invoices</span>
+                  <span className="text-xs text-muted-foreground font-normal mt-0.5">Numbering & auto-reminders</span>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6 pt-2">
+              <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                <Card>
               <CardHeader>
                 <CardTitle>Invoice Templates</CardTitle>
                 <CardDescription>Create and manage invoice templates for different companies</CardDescription>
@@ -1108,11 +1090,26 @@ export default function ConfigurationPage() {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-          {/* Payment Methods Configuration */}
-          <TabsContent value="payments" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card>
+          {/* Payments Configuration */}
+          <AccordionItem value="payments" className="border border-white/10 dark:border-white/5 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl shadow-sm overflow-hidden data-[state=open]:border-amber-500/30 data-[state=open]:shadow-md data-[state=open]:shadow-amber-500/10 transition-all duration-300">
+            <AccordionTrigger id="config-payments" className="px-6 py-4 hover:bg-card/50 hover:no-underline group transition-all [&[data-state=open]>svg]:rotate-180">
+              <div className="flex items-center gap-4 text-left flex-1">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-500/10 to-amber-500/5 border border-amber-500/20 text-amber-500 flex items-center justify-center shrink-0 group-data-[state=open]:scale-110 group-data-[state=open]:bg-amber-500/20 transition-all duration-300 shadow-inner">
+                  <CreditCard className="h-5 w-5 drop-shadow-sm" />
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span className="font-semibold text-foreground text-base group-hover:text-amber-500 transition-colors">Payments</span>
+                  <span className="text-xs text-muted-foreground font-normal mt-0.5">Payment gateways & methods</span>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6 pt-2">
+              <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                <Card>
               <CardHeader>
                 <CardTitle>Payment Methods</CardTitle>
                 <CardDescription>Configure how you accept payments</CardDescription>
@@ -1242,11 +1239,26 @@ export default function ConfigurationPage() {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
           {/* General Configuration */}
-          <TabsContent value="general" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card>
+          <AccordionItem value="general" className="border border-white/10 dark:border-white/5 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl shadow-sm overflow-hidden data-[state=open]:border-slate-500/30 data-[state=open]:shadow-md data-[state=open]:shadow-slate-500/10 transition-all duration-300">
+            <AccordionTrigger id="config-general" className="px-6 py-4 hover:bg-card/50 hover:no-underline group transition-all [&[data-state=open]>svg]:rotate-180">
+              <div className="flex items-center gap-4 text-left flex-1">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-slate-500/10 to-slate-500/5 border border-slate-500/20 text-slate-500 flex items-center justify-center shrink-0 group-data-[state=open]:scale-110 group-data-[state=open]:bg-slate-500/20 transition-all duration-300 shadow-inner">
+                  <SettingsIcon className="h-5 w-5 drop-shadow-sm" />
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span className="font-semibold text-foreground text-base group-hover:text-slate-500 transition-colors">General</span>
+                  <span className="text-xs text-muted-foreground font-normal mt-0.5">App settings & data export</span>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6 pt-2">
+              <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                <Card>
               <CardHeader>
                 <CardTitle>Storage Management</CardTitle>
                 <CardDescription>Manage your local data and storage usage</CardDescription>
@@ -1333,6 +1345,17 @@ export default function ConfigurationPage() {
                     </SelectContent>
                   </Select>
                 </div>
+
+                <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50 border border-border mt-4">
+                  <div>
+                    <p className="font-semibold text-foreground">Dark Mode</p>
+                    <p className="text-sm text-muted-foreground">Toggle between light and dark theme</p>
+                  </div>
+                  <Switch
+                    checked={theme === "dark"}
+                    onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+                  />
+                </div>
               </CardContent>
             </Card>
 
@@ -1370,11 +1393,26 @@ export default function ConfigurationPage() {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-          {/* Data Management Tab */}
-          <TabsContent value="data" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card>
+          {/* Backup Configuration */}
+          <AccordionItem value="data" className="border border-white/10 dark:border-white/5 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl shadow-sm overflow-hidden data-[state=open]:border-rose-500/30 data-[state=open]:shadow-md data-[state=open]:shadow-rose-500/10 transition-all duration-300">
+            <AccordionTrigger id="config-data" className="px-6 py-4 hover:bg-card/50 hover:no-underline group transition-all [&[data-state=open]>svg]:rotate-180">
+              <div className="flex items-center gap-4 text-left flex-1">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500/10 to-rose-500/5 border border-rose-500/20 text-rose-500 flex items-center justify-center shrink-0 group-data-[state=open]:scale-110 group-data-[state=open]:bg-rose-500/20 transition-all duration-300 shadow-inner">
+                  <Database className="h-5 w-5 drop-shadow-sm" />
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span className="font-semibold text-foreground text-base group-hover:text-rose-500 transition-colors">Backup</span>
+                  <span className="text-xs text-muted-foreground font-normal mt-0.5">Export your data</span>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6 pt-2">
+              <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                <Card>
               <CardHeader>
                 <div className="flex items-center gap-3 mb-1">
                   <div className="h-10 w-10 rounded-xl bg-cyan-500/10 flex items-center justify-center shrink-0">
@@ -1427,10 +1465,10 @@ export default function ConfigurationPage() {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-
-          </div>
-        </Tabs>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
 
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>

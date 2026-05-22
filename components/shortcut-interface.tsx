@@ -57,7 +57,7 @@ export function ShortcutInterface() {
                     className="h-16 sm:h-16 md:h-16 w-auto mb-6 sm:mb-8"
                 />
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center drop-shadow-md">
-                    Ready To <span className="text-[#1bb5b3]">Hear</span> you <span className="text-[#1bb5b3]">!</span> {userName}
+                    Ready to <span className="text-[#1bb5b3]">Hear</span> you, {userName}!
                 </h1>
             </div>
 
@@ -67,57 +67,59 @@ export function ShortcutInterface() {
                     {/* Voice */}
                     <button
                         onClick={(e) => handleNavigation(e, "/voice-assistant")}
-                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-white rounded-full flex flex-col items-center justify-center shadow-[0_0_40px_rgba(27,181,179,0.5)] transition-transform hover:scale-105 z-20 mx-auto"
+                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-[#1bb5b3]/20 backdrop-blur-md border border-[#1bb5b3]/40 rounded-full flex flex-col items-center justify-center text-white shadow-[0_0_30px_rgba(27,181,179,0.25)] hover:shadow-[0_0_50px_rgba(27,181,179,0.5)] transition-all duration-300 hover:scale-105 z-20 mx-auto group"
                     >
-                        <div className="relative w-16 h-16 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center mb-1 md:mb-2">
-                            <Image src="/images/adstrategic-icon.png" alt="Voice" width={80} height={80} className="relative z-10 w-full h-full object-contain" />
+                        <div className="relative w-16 h-16 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center mb-1 md:mb-2 group-hover:scale-110 transition-transform duration-300">
+                            {/* Pulse animation ring */}
+                            <div className="absolute inset-0 rounded-full bg-[#1bb5b3]/20 animate-ping opacity-75" />
+                            <Image src="/images/adstrategic-icon.png" alt="Voice" width={80} height={80} className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_15px_rgba(27,181,179,0.8)]" />
                         </div>
-                        <span className="font-semibold text-xs sm:text-sm md:text-lg text-slate-800 uppercase tracking-wider">Voice</span>
+                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider drop-shadow-sm transition-colors">Voice</span>
                     </button>
 
                     {/* Invoices */}
                     <button
                         onClick={(e) => handleNavigation(e, "/invoices")}
-                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-white rounded-full flex flex-col items-center justify-center text-slate-800 shadow-xl transition-transform hover:scale-105 z-10 mx-auto"
+                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-blue-500/20 backdrop-blur-md border border-blue-500/40 rounded-full flex flex-col items-center justify-center text-white shadow-[0_0_30px_rgba(59,130,246,0.2)] hover:shadow-[0_0_50px_rgba(59,130,246,0.5)] transition-all duration-300 hover:scale-105 z-10 mx-auto group"
                     >
-                        <FileText className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-[#1bb5b3]" strokeWidth={1.5} />
-                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider">Invoices</span>
+                        <FileText className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-blue-400 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" strokeWidth={1.5} />
+                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider drop-shadow-sm transition-colors">Invoices</span>
                     </button>
 
                     {/* Quotes */}
                     <button
                         onClick={(e) => handleNavigation(e, "/quotes")}
-                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-white rounded-full flex flex-col items-center justify-center text-slate-800 shadow-xl transition-transform hover:scale-105 z-10 mx-auto"
+                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-sky-400/20 backdrop-blur-md border border-sky-400/40 rounded-full flex flex-col items-center justify-center text-white shadow-[0_0_30px_rgba(56,189,248,0.2)] hover:shadow-[0_0_50px_rgba(56,189,248,0.5)] transition-all duration-300 hover:scale-105 z-10 mx-auto group"
                     >
-                        <FileCheck className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-[#1bb5b3]" strokeWidth={1.5} />
-                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider">Quotes</span>
+                        <FileCheck className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-sky-400 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]" strokeWidth={1.5} />
+                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider drop-shadow-sm transition-colors">Quotes</span>
                     </button>
 
                     {/* Expenses */}
                     <button
                         onClick={(e) => handleNavigation(e, "/expenses")}
-                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-white rounded-full flex flex-col items-center justify-center text-slate-800 shadow-xl transition-transform hover:scale-105 z-10 mx-auto"
+                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-teal-400/20 backdrop-blur-md border border-teal-400/40 rounded-full flex flex-col items-center justify-center text-white shadow-[0_0_30px_rgba(45,212,191,0.2)] hover:shadow-[0_0_50px_rgba(45,212,191,0.5)] transition-all duration-300 hover:scale-105 z-10 mx-auto group"
                     >
-                        <ClipboardList className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-[#1bb5b3]" strokeWidth={1.5} />
-                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider">Expenses</span>
+                        <ClipboardList className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-teal-400 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]" strokeWidth={1.5} />
+                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider drop-shadow-sm transition-colors">Expenses</span>
                     </button>
 
                     {/* Clients */}
                     <button
                         onClick={(e) => handleNavigation(e, "/clients")}
-                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-white rounded-full flex flex-col items-center justify-center text-slate-800 shadow-xl transition-transform hover:scale-105 z-10 mx-auto"
+                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-cyan-500/20 backdrop-blur-md border border-cyan-500/40 rounded-full flex flex-col items-center justify-center text-white shadow-[0_0_30px_rgba(6,182,212,0.2)] hover:shadow-[0_0_50px_rgba(6,182,212,0.5)] transition-all duration-300 hover:scale-105 z-10 mx-auto group"
                     >
-                        <Users className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-[#1bb5b3]" strokeWidth={1.5} />
-                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider">Clients</span>
+                        <Users className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-cyan-400 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]" strokeWidth={1.5} />
+                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider drop-shadow-sm transition-colors">Clients</span>
                     </button>
 
                     {/* More */}
                     <button
                         onClick={handleMoreClick}
-                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-white rounded-full flex flex-col items-center justify-center text-slate-800 shadow-xl transition-transform hover:scale-105 z-10 mx-auto"
+                        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 bg-white/15 backdrop-blur-md border border-white/40 rounded-full flex flex-col items-center justify-center text-white shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_50px_rgba(255,255,255,0.3)] transition-all duration-300 hover:scale-105 z-10 mx-auto group"
                     >
-                        <LayoutGrid className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-[#1bb5b3]" strokeWidth={1.5} />
-                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider">More</span>
+                        <LayoutGrid className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mb-2 text-slate-200 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" strokeWidth={1.5} />
+                        <span className="font-semibold text-xs sm:text-sm md:text-lg uppercase tracking-wider drop-shadow-sm transition-colors">More</span>
                     </button>
                 </div>
             </div>
