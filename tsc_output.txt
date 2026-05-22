@@ -1,0 +1,100 @@
+﻿app/page.tsx(155,23): error TS2322: Type '{ hidden: { opacity: number; y: number; }; visible: { opacity: number; y: number; transition: { duration: number; ease: string; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ duration: number; ease: string; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ duration: number; ease: string; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ duration: number; ease: string; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'ease' are incompatible.
+                    Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
+app/page.tsx(172,23): error TS2322: Type '{ hidden: { opacity: number; y: number; }; visible: { opacity: number; y: number; transition: { duration: number; ease: string; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ duration: number; ease: string; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ duration: number; ease: string; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ duration: number; ease: string; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'ease' are incompatible.
+                    Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
+app/page.tsx(189,23): error TS2322: Type '{ hidden: { opacity: number; y: number; }; visible: { opacity: number; y: number; transition: { duration: number; ease: string; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ duration: number; ease: string; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ duration: number; ease: string; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ duration: number; ease: string; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'ease' are incompatible.
+                    Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
+app/page.tsx(206,23): error TS2322: Type '{ hidden: { opacity: number; y: number; }; visible: { opacity: number; y: number; transition: { duration: number; ease: string; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ duration: number; ease: string; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ duration: number; ease: string; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ duration: number; ease: string; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'ease' are incompatible.
+                    Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
+app/page.tsx(225,23): error TS2322: Type '{ hidden: { opacity: number; y: number; }; visible: { opacity: number; y: number; transition: { duration: number; ease: string; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; y: number; transition: { duration: number; ease: string; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ duration: number; ease: string; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ duration: number; ease: string; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ duration: number; ease: string; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'ease' are incompatible.
+                    Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
+app/payments/page.tsx(159,11): error TS2339: Property 'emittedAt' does not exist on type '{ paymentStatus: "paid" | "pending" | "overdue" | "partially_paid"; paidAmount: number; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; ... 5 more ...; dueDate: string; }'.
+app/payments/page.tsx(159,26): error TS2339: Property 'createdAt' does not exist on type '{ paymentStatus: "paid" | "pending" | "overdue" | "partially_paid"; paidAmount: number; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; ... 5 more ...; dueDate: string; }'.
+app/payments/page.tsx(162,11): error TS2339: Property 'emittedAt' does not exist on type '{ paymentStatus: "paid" | "pending" | "overdue" | "partially_paid"; paidAmount: number; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; ... 5 more ...; dueDate: string; }'.
+app/payments/page.tsx(162,26): error TS2339: Property 'createdAt' does not exist on type '{ paymentStatus: "paid" | "pending" | "overdue" | "partially_paid"; paidAmount: number; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; ... 5 more ...; dueDate: string; }'.
+app/payments/page.tsx(203,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(predicate: (value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => value is Invoice | { ...; }, thisArg?: any): (Invoice | { ...; })[]', gave the following error.
+    Argument of type '(inv: Invoice) => boolean' is not assignable to parameter of type '(value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => value is Invoice | { ....'.
+      Types of parameters 'inv' and 'value' are incompatible.
+        Type 'Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }' is not assignable to type 'Invoice'.
+          Type '{ paymentStatus: string; status: string; id: number | string; invoiceNumber: string; client?: string; clientName?: string; amount?: number; total?: number; date?: string; issueDate?: string; dueDate: string; paidAmount?: number; }' is not assignable to type 'Invoice'.
+            Types of property 'paymentStatus' are incompatible.
+              Type 'string' is not assignable to type '"paid" | "pending" | "overdue" | "partially_paid" | undefined'.
+  Overload 2 of 2, '(predicate: (value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => unknown, thisArg?: any): (Invoice | { ...; })[]', gave the following error.
+    Argument of type '(inv: Invoice) => boolean' is not assignable to parameter of type '(value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => unknown'.
+      Types of parameters 'inv' and 'value' are incompatible.
+        Type 'Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }' is not assignable to type 'Invoice'.
+          Type '{ paymentStatus: string; status: string; id: number | string; invoiceNumber: string; client?: string; clientName?: string; amount?: number; total?: number; date?: string; issueDate?: string; dueDate: string; paidAmount?: number; }' is not assignable to type 'Invoice'.
+            Types of property 'paymentStatus' are incompatible.
+              Type 'string' is not assignable to type '"paid" | "pending" | "overdue" | "partially_paid" | undefined'.
+app/payments/page.tsx(206,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(predicate: (value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => value is Invoice | { ...; }, thisArg?: any): (Invoice | { ...; })[]', gave the following error.
+    Argument of type '(inv: Invoice) => boolean' is not assignable to parameter of type '(value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => value is Invoice | { ....'.
+      Types of parameters 'inv' and 'value' are incompatible.
+        Type 'Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }' is not assignable to type 'Invoice'.
+          Type '{ paymentStatus: string; status: string; id: number | string; invoiceNumber: string; client?: string; clientName?: string; amount?: number; total?: number; date?: string; issueDate?: string; dueDate: string; paidAmount?: number; }' is not assignable to type 'Invoice'.
+            Types of property 'paymentStatus' are incompatible.
+              Type 'string' is not assignable to type '"paid" | "pending" | "overdue" | "partially_paid" | undefined'.
+  Overload 2 of 2, '(predicate: (value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => unknown, thisArg?: any): (Invoice | { ...; })[]', gave the following error.
+    Argument of type '(inv: Invoice) => boolean' is not assignable to parameter of type '(value: Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }, index: number, array: (Invoice | { ...; })[]) => unknown'.
+      Types of parameters 'inv' and 'value' are incompatible.
+        Type 'Invoice | { paymentStatus: string; status: string; id: string | number; invoiceNumber: string; client?: string | undefined; clientName?: string | undefined; amount?: number | undefined; ... 4 more ...; paidAmount?: number | undefined; }' is not assignable to type 'Invoice'.
+          Type '{ paymentStatus: string; status: string; id: number | string; invoiceNumber: string; client?: string; clientName?: string; amount?: number; total?: number; date?: string; issueDate?: string; dueDate: string; paidAmount?: number; }' is not assignable to type 'Invoice'.
+            Types of property 'paymentStatus' are incompatible.
+              Type 'string' is not assignable to type '"paid" | "pending" | "overdue" | "partially_paid" | undefined'.
+components/receive-payment-dialog.tsx(150,19): error TS2339: Property 'status' does not exist on type 'Invoice'.
+components/receive-payment-dialog.tsx(176,19): error TS2339: Property 'status' does not exist on type 'Invoice'.
+components/ui/chart.tsx(109,3): error TS2339: Property 'payload' does not exist on type 'Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { active?: boolean | undefined; includeHidden?: boolean | undefined; ... 17 more ...; axisId?: AxisId | undefined; } & ClassAttributes<...> & HTMLAttributes<...> & { ...; }'.
+components/ui/chart.tsx(114,3): error TS2339: Property 'label' does not exist on type 'Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { active?: boolean | undefined; includeHidden?: boolean | undefined; ... 17 more ...; axisId?: AxisId | undefined; } & ClassAttributes<...> & HTMLAttributes<...> & { ...; }'.
+components/ui/chart.tsx(182,23): error TS7006: Parameter 'item' implicitly has an 'any' type.
+components/ui/chart.tsx(182,29): error TS7006: Parameter 'index' implicitly has an 'any' type.
+components/ui/chart.tsx(260,39): error TS2344: Type '"verticalAlign" | "payload"' does not satisfy the constraint '"string" | "filter" | "fill" | "values" | "style" | "clipPath" | "mask" | "path" | "key" | "type" | "suppressHydrationWarning" | "className" | "id" | "lang" | "tabIndex" | "role" | ... 430 more ... | "onBBoxUpdate"'.
+  Type '"payload"' is not assignable to type '"string" | "filter" | "fill" | "values" | "style" | "clipPath" | "mask" | "path" | "key" | "type" | "suppressHydrationWarning" | "className" | "id" | "lang" | "tabIndex" | "role" | ... 430 more ... | "onBBoxUpdate"'.
+components/ui/chart.tsx(266,17): error TS2339: Property 'length' does not exist on type '{}'.
+components/ui/chart.tsx(278,16): error TS2339: Property 'map' does not exist on type '{}'.
+components/ui/chart.tsx(278,21): error TS7006: Parameter 'item' implicitly has an 'any' type.

@@ -1,0 +1,4 @@
+﻿app/invoices/[id]/page.tsx(43,3): error TS2300: Duplicate identifier 'totalTax'.
+app/invoices/[id]/page.tsx(44,3): error TS2300: Duplicate identifier 'totalTax'.
+app/invoices/new/page.tsx(894,7): error TS1117: An object literal cannot have multiple properties with the same name.
+app/invoices/new/page.tsx(895,7): error TS1117: An object literal cannot have multiple properties with the same name.
