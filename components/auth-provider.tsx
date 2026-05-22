@@ -13,15 +13,15 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
   const pathname = usePathname()
 
   useEffect(() => {
-    // Check if user is authenticated on mount
-    const authStatus = localStorage.getItem("AddInvoices-auth")
-    setIsAuthenticated(authStatus === "true")
+    // Unconditionally authenticate user to bypass login
+    localStorage.setItem("AddInvoices-auth", "true")
+    setIsAuthenticated(true)
     setIsLoading(false)
   }, [])
 
