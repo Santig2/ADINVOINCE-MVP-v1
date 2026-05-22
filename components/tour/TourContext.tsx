@@ -119,21 +119,9 @@ export const INVOICES_TOUR_STEPS: TourStep[] = [
         position: "bottom",
     },
     {
-        targetId: "invoices-voice-btn",
-        title: "Invoice by Voice",
-        content: "Create invoices hands-free! Just speak your invoice details and let AI do the work.",
-        position: "bottom",
-    },
-    {
         targetId: "invoices-search",
         title: "Search Invoices",
         content: "Quickly find invoices by number, client name, or amount. Type to filter your results instantly.",
-        position: "bottom",
-    },
-    {
-        targetId: "invoices-filter",
-        title: "Filter by Status",
-        content: "Filter invoices by status: paid, pending, issued, overdue, or draft. Narrow down what you're looking for.",
         position: "bottom",
     },
     {
@@ -159,21 +147,9 @@ export const QUOTES_TOUR_STEPS: TourStep[] = [
         position: "bottom",
     },
     {
-        targetId: "quotes-voice-btn",
-        title: "Quote by Voice",
-        content: "Create quotes hands-free! Just speak the details and let AI do the work.",
-        position: "bottom",
-    },
-    {
         targetId: "quotes-search",
         title: "Search Quotes",
         content: "Find quotes by client name, quote number, or amount.",
-        position: "bottom",
-    },
-    {
-        targetId: "quotes-filter",
-        title: "Filter Quotes",
-        content: "Filter by status: pending, accepted, rejected, or expired.",
         position: "bottom",
     },
     {
@@ -198,12 +174,7 @@ export const CONTRACTS_TOUR_STEPS: TourStep[] = [
         content: "Draft professional contracts for your clients. Add terms, conditions, and get digital signatures.",
         position: "bottom",
     },
-    {
-        targetId: "contracts-voice-btn",
-        title: "Contract by Voice",
-        content: "Create contracts using voice commands. Speak the terms and let AI generate the contract.",
-        position: "bottom",
-    },
+
     {
         targetId: "contracts-list",
         title: "Contract Library",
@@ -220,12 +191,7 @@ export const SUBSCRIPTIONS_TOUR_STEPS: TourStep[] = [
         content: "Set up recurring services for clients. Define frequency (monthly, biweekly) and automate invoicing.",
         position: "bottom",
     },
-    {
-        targetId: "subscriptions-filter",
-        title: "Filter Subscriptions",
-        content: "Filter by status: active, paused, or cancelled subscriptions.",
-        position: "bottom",
-    },
+
     {
         targetId: "subscriptions-list",
         title: "Subscription Management",
@@ -258,12 +224,7 @@ export const EXPENSES_TOUR_STEPS: TourStep[] = [
         content: "Record business expenses manually. Track spending by category and date.",
         position: "bottom",
     },
-    {
-        targetId: "expenses-voice-btn",
-        title: "Expense by Voice",
-        content: "Add expenses hands-free! Just speak the details: amount, category, and description.",
-        position: "bottom",
-    },
+
     {
         targetId: "expenses-search",
         title: "Search Expenses",
@@ -318,24 +279,7 @@ export const CATALOG_TOUR_STEPS: TourStep[] = [
         content: "Add items to your catalog. These will auto-complete when creating invoices, saving you time.",
         position: "bottom",
     },
-    {
-        targetId: "catalog-voice-btn",
-        title: "Catalog by Voice",
-        content: "Add products and services using voice commands. Just speak the name, price, and description.",
-        position: "bottom",
-    },
-    {
-        targetId: "catalog-search",
-        title: "Search Catalog",
-        content: "Find items in your catalog by name or description.",
-        position: "bottom",
-    },
-    {
-        targetId: "catalog-filter",
-        title: "Filter by Company",
-        content: "If you manage multiple companies, filter catalog items by company.",
-        position: "bottom",
-    },
+
     {
         targetId: "catalog-list",
         title: "Product Library",
@@ -441,6 +385,11 @@ export function TourProvider({ children }: { children: ReactNode }) {
 
         const tourCompleted = localStorage.getItem("tourCompleted");
         if (!tourCompleted) {
+            // Only auto-start this detailed step-by-step tour on desktop
+            if (window.innerWidth < 768) {
+                return;
+            }
+
             // "Shortcuts" view happens when pathname is "/" and mode is not "dashboard"
             const isShortcuts = pathname === "/" && searchParams?.get("mode") !== "dashboard";
 

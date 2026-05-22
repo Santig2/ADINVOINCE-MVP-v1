@@ -16,9 +16,13 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           <GlobalSearch />
         </div>
 
-        {/* Main Content - Add top padding for mobile to account for fixed header */}
-        <main className="min-h-screen w-full pt-16 pb-24 md:pb-0 md:pt-0 bg-cover bg-center bg-no-repeat bg-fixed bg-[url('/images/bg%20phone%20dos.png')] dark:bg-[url('/images/bg%20phone%20dos%20drakmode.png')] md:bg-[url('/images/background%20app%20dos%20.png')] dark:md:bg-[url('/images/background%20app%20dos%20drakmode.png')]">
-          {children}
+        {/* Main Content */}
+        <main className="min-h-screen w-full pt-16 pb-24 md:pb-0 md:pt-0 relative bg-cover bg-center bg-no-repeat bg-fixed bg-[url('/images/bg%20phone%20dos.png')] dark:bg-[url('/images/bg%20phone%20dos%20drakmode.png')] md:bg-[url('/images/background%20app%20dos%20.png')] dark:md:bg-[url('/images/background%20app%20dos%20drakmode.png')]">
+          {/* Subtle gradient overlay to enhance glassmorphism contrast */}
+          <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/10 to-primary/5 pointer-events-none" />
+          <div className="relative z-10">
+            {children}
+          </div>
         </main>
       </div>
       <BottomNav />

@@ -170,7 +170,7 @@ export default function RemindersPage() {
               Manage payment reminders for overdue invoices
             </p>
           </div>
-          <Button id="reminders-create-btn" onClick={() => setMassReminderDialogOpen(true)} className="gap-2 w-full sm:w-auto rounded-xl sm:rounded-md h-12 sm:h-10">
+          <Button id="reminders-create-btn" variant="accent" onClick={() => setMassReminderDialogOpen(true)} className="gap-2 w-full sm:w-auto rounded-xl sm:rounded-md h-12 sm:h-10 transition-all duration-300">
             <SendHorizontal className="h-4 w-4" />
             Send Mass Reminders
           </Button>
@@ -185,10 +185,12 @@ export default function RemindersPage() {
         >
           <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x justify-start sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible">
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Overdue</CardTitle>
-                  <AlertCircle className="h-4 w-4 text-destructive opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Overdue</CardTitle>
+                  <div className="p-1.5 bg-rose-500/15 dark:bg-rose-500/20 rounded-lg ring-1 ring-rose-500/20 shadow-[0_0_10px_rgba(244,63,94,0.1)]">
+                    <AlertCircle className="h-4 w-4 text-rose-600 dark:text-rose-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-xl font-bold">3</div>
@@ -198,10 +200,12 @@ export default function RemindersPage() {
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Scheduled</CardTitle>
-                  <Clock className="h-4 w-4 text-chart-4 opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Scheduled</CardTitle>
+                  <div className="p-1.5 bg-amber-500/15 dark:bg-amber-500/20 rounded-lg ring-1 ring-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+                    <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-xl font-bold">2</div>
@@ -211,10 +215,12 @@ export default function RemindersPage() {
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Sent Today</CardTitle>
-                  <Send className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Sent Today</CardTitle>
+                  <div className="p-1.5 bg-blue-500/15 dark:bg-blue-500/20 rounded-lg ring-1 ring-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                    <Send className="h-4 w-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-xl font-bold">5</div>
@@ -224,10 +230,12 @@ export default function RemindersPage() {
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Success Rate</CardTitle>
-                  <CheckCircle2 className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Success Rate</CardTitle>
+                  <div className="p-1.5 bg-emerald-500/15 dark:bg-emerald-500/20 rounded-lg ring-1 ring-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-xl font-bold">78%</div>

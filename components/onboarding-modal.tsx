@@ -16,6 +16,11 @@ export function OnboardingModal() {
   useEffect(() => {
     const hasSeen = localStorage.getItem("hasSeenOnboarding")
     if (!hasSeen) {
+      // Only show this swipeable onboarding on mobile devices
+      if (window.innerWidth >= 768) {
+        return;
+      }
+
       setTimeout(() => {
         setOpen(true)
         triggerHaptic("heavy")

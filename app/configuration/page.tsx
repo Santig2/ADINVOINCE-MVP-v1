@@ -464,9 +464,9 @@ export default function ConfigurationPage() {
 
         <Tabs defaultValue="user" className="flex flex-col lg:flex-row gap-6 lg:gap-8 max-w-6xl mx-auto mt-4">
           <TabsList className="flex flex-col h-auto w-full lg:w-72 bg-transparent gap-3 justify-start items-stretch p-0 shrink-0">
-            <TabsTrigger id="config-profile" value="user" className="justify-start gap-4 p-4 rounded-2xl bg-card border border-border/50 shadow-sm hover:border-primary/30 data-[state=active]:bg-primary/5 data-[state=active]:border-primary/30 data-[state=active]:shadow-md transition-all duration-300">
-              <div className="h-10 w-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0">
-                <User className="h-5 w-5" />
+            <TabsTrigger id="config-profile" value="user" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
+                <User className="h-5 w-5 drop-shadow-sm" />
               </div>
               <div className="flex flex-col items-start text-left">
                 <span className="font-semibold text-foreground text-base">User Profile</span>
@@ -474,9 +474,9 @@ export default function ConfigurationPage() {
               </div>
             </TabsTrigger>
             
-            <TabsTrigger id="config-company" value="company" className="justify-start gap-4 p-4 rounded-2xl bg-card border border-border/50 shadow-sm hover:border-primary/30 data-[state=active]:bg-primary/5 data-[state=active]:border-primary/30 data-[state=active]:shadow-md transition-all duration-300">
-              <div className="h-10 w-10 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center shrink-0">
-                <Building2 className="h-5 w-5" />
+            <TabsTrigger id="config-company" value="company" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
+                <Building2 className="h-5 w-5 drop-shadow-sm" />
               </div>
               <div className="flex flex-col items-start text-left">
                 <span className="font-semibold text-foreground text-base">Company</span>
@@ -484,9 +484,9 @@ export default function ConfigurationPage() {
               </div>
             </TabsTrigger>
             
-            <TabsTrigger value="invoices" className="justify-start gap-4 p-4 rounded-2xl bg-card border border-border/50 shadow-sm hover:border-primary/30 data-[state=active]:bg-primary/5 data-[state=active]:border-primary/30 data-[state=active]:shadow-md transition-all duration-300">
-              <div className="h-10 w-10 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center shrink-0">
-                <FileText className="h-5 w-5" />
+            <TabsTrigger value="invoices" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
+                <FileText className="h-5 w-5 drop-shadow-sm" />
               </div>
               <div className="flex flex-col items-start text-left">
                 <span className="font-semibold text-foreground text-base">Invoices</span>
@@ -494,9 +494,9 @@ export default function ConfigurationPage() {
               </div>
             </TabsTrigger>
             
-            <TabsTrigger id="config-billing" value="payments" className="justify-start gap-4 p-4 rounded-2xl bg-card border border-border/50 shadow-sm hover:border-primary/30 data-[state=active]:bg-primary/5 data-[state=active]:border-primary/30 data-[state=active]:shadow-md transition-all duration-300">
-              <div className="h-10 w-10 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center shrink-0">
-                <CreditCard className="h-5 w-5" />
+            <TabsTrigger id="config-billing" value="payments" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
+                <CreditCard className="h-5 w-5 drop-shadow-sm" />
               </div>
               <div className="flex flex-col items-start text-left">
                 <span className="font-semibold text-foreground text-base">Payments</span>
@@ -504,9 +504,9 @@ export default function ConfigurationPage() {
               </div>
             </TabsTrigger>
             
-            <TabsTrigger id="config-notifications" value="general" className="justify-start gap-4 p-4 rounded-2xl bg-card border border-border/50 shadow-sm hover:border-primary/30 data-[state=active]:bg-primary/5 data-[state=active]:border-primary/30 data-[state=active]:shadow-md transition-all duration-300">
-              <div className="h-10 w-10 rounded-xl bg-gray-500/10 text-gray-500 flex items-center justify-center shrink-0">
-                <SettingsIcon className="h-5 w-5" />
+            <TabsTrigger id="config-notifications" value="general" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
+                <SettingsIcon className="h-5 w-5 drop-shadow-sm" />
               </div>
               <div className="flex flex-col items-start text-left">
                 <span className="font-semibold text-foreground text-base">General</span>
@@ -514,9 +514,9 @@ export default function ConfigurationPage() {
               </div>
             </TabsTrigger>
 
-            <TabsTrigger id="config-data" value="data" className="justify-start gap-4 p-4 rounded-2xl bg-card border border-border/50 shadow-sm hover:border-primary/30 data-[state=active]:bg-primary/5 data-[state=active]:border-primary/30 data-[state=active]:shadow-md transition-all duration-300">
-              <div className="h-10 w-10 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center shrink-0">
-                <Database className="h-5 w-5" />
+            <TabsTrigger id="config-data" value="data" className="justify-start gap-4 p-4 rounded-2xl bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-sm hover:border-primary-light/30 hover:-translate-y-0.5 data-[state=active]:from-primary-dark/10 data-[state=active]:to-primary-light/5 data-[state=active]:border-primary-light/30 data-[state=active]:shadow-[0_8px_24px_-6px_rgba(0,117,135,0.2)] transition-all duration-300 group">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary-dark/5 border border-primary-light/20 text-primary flex items-center justify-center shrink-0 group-data-[state=active]:scale-110 group-data-[state=active]:bg-primary-light/20 transition-all duration-300 shadow-inner">
+                <Database className="h-5 w-5 drop-shadow-sm" />
               </div>
               <div className="flex flex-col items-start text-left">
                 <span className="font-semibold text-foreground text-base">Backup</span>
@@ -529,7 +529,7 @@ export default function ConfigurationPage() {
 
           {/* User Configuration */}
           <TabsContent value="user" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Personal Information</CardTitle>
                 <CardDescription>Update your personal details and preferences</CardDescription>
@@ -666,7 +666,7 @@ export default function ConfigurationPage() {
             {/* Company Cards */}
             <div className="space-y-4">
               {companies.map((company) => (
-                <Card key={company.id} className="bg-card border-border">
+                <Card key={company.id}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -885,7 +885,7 @@ export default function ConfigurationPage() {
 
           {/* Invoice Configuration */}
           <TabsContent value="invoices" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Invoice Templates</CardTitle>
                 <CardDescription>Create and manage invoice templates for different companies</CardDescription>
@@ -975,7 +975,7 @@ export default function ConfigurationPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Invoice Numbering</CardTitle>
                 <CardDescription>Configure automatic invoice number generation</CardDescription>
@@ -1028,7 +1028,7 @@ export default function ConfigurationPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Automatic Reminders</CardTitle>
                 <CardDescription>Configure automatic payment reminders for pending invoices</CardDescription>
@@ -1112,7 +1112,7 @@ export default function ConfigurationPage() {
 
           {/* Payment Methods Configuration */}
           <TabsContent value="payments" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Payment Methods</CardTitle>
                 <CardDescription>Configure how you accept payments</CardDescription>
@@ -1246,7 +1246,7 @@ export default function ConfigurationPage() {
 
           {/* General Configuration */}
           <TabsContent value="general" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Storage Management</CardTitle>
                 <CardDescription>Manage your local data and storage usage</CardDescription>
@@ -1303,7 +1303,7 @@ export default function ConfigurationPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Appearance</CardTitle>
                 <CardDescription>Customize the look and feel of the application</CardDescription>
@@ -1336,7 +1336,7 @@ export default function ConfigurationPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Data Management</CardTitle>
                 <CardDescription>Export or import your configuration settings</CardDescription>
@@ -1374,7 +1374,7 @@ export default function ConfigurationPage() {
 
           {/* Data Management Tab */}
           <TabsContent value="data" className="mt-0 space-y-6 focus-visible:outline-none">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <div className="flex items-center gap-3 mb-1">
                   <div className="h-10 w-10 rounded-xl bg-cyan-500/10 flex items-center justify-center shrink-0">

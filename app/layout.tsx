@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/components/auth-provider";
@@ -9,8 +9,15 @@ import { TourProvider } from "@/components/tour/TourContext";
 import { TourOverlay } from "@/components/tour/TourOverlay";
 import "./globals.css";
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const outfit = Outfit({ 
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   title: "AddInvoices - Powered by ADSTRATEGIC",
@@ -38,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider defaultTheme="light" storageKey="AddInvoices-theme">
           <AuthProvider>
             <Suspense fallback={null}>

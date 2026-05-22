@@ -218,8 +218,9 @@ export default function ClientsPage() {
           <div className="hidden md:flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <Button
               id="clients-create-btn"
+              variant="accent"
               size="lg"
-              className="gap-2 w-full sm:w-auto hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+              className="gap-2 w-full sm:w-auto transition-all duration-300"
               onClick={handleAddClient}
             >
               <Plus className="h-5 w-5" />
@@ -245,10 +246,12 @@ export default function ClientsPage() {
           {/* Scrollable Glass Stat Cards */}
           <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x justify-start sm:grid sm:grid-cols-4 sm:overflow-visible">
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Total Clients</CardTitle>
-                  <Building2 className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Total Clients</CardTitle>
+                  <div className="p-1.5 bg-blue-500/15 dark:bg-blue-500/20 rounded-lg ring-1 ring-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                    <Building2 className="h-4 w-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{totalClients}</div>
@@ -257,10 +260,12 @@ export default function ClientsPage() {
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Active</CardTitle>
-                  <Building2 className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Active</CardTitle>
+                  <div className="p-1.5 bg-emerald-500/15 dark:bg-emerald-500/20 rounded-lg ring-1 ring-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                    <Building2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{activeClients}</div>
@@ -269,10 +274,12 @@ export default function ClientsPage() {
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">New This Month</CardTitle>
-                  <Plus className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">New This Month</CardTitle>
+                  <div className="p-1.5 bg-purple-500/15 dark:bg-purple-500/20 rounded-lg ring-1 ring-purple-500/20 shadow-[0_0_10px_rgba(168,85,247,0.1)]">
+                    <Plus className="h-4 w-4 text-purple-600 dark:text-purple-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{newThisMonth}</div>

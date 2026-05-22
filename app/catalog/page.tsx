@@ -236,7 +236,7 @@ export default function CatalogPage() {
             </p>
           </div>
           <div className="hidden md:flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-            <Button id="catalog-create-btn" size="lg" className="gap-2 w-full hover:shadow-lg transition-all" onClick={openAddModal}>
+            <Button id="catalog-create-btn" variant="accent" size="lg" className="gap-2 w-full transition-all duration-300" onClick={openAddModal}>
               <Plus className="h-5 w-5" />
               Add Item
             </Button>
@@ -259,10 +259,12 @@ export default function CatalogPage() {
 
           <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x justify-start sm:grid sm:grid-cols-3 sm:overflow-visible">
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Catalog Value</CardTitle>
-                  <Package className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Catalog Value</CardTitle>
+                  <div className="p-1.5 bg-blue-500/15 dark:bg-blue-500/20 rounded-lg ring-1 ring-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                    <Package className="h-4 w-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-xl font-bold">

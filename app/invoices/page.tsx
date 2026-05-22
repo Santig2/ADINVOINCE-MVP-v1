@@ -493,8 +493,9 @@ export default function InvoicesPage() {
             <Link href="/invoices/new" className="flex-1 sm:flex-none">
               <Button
                 id="invoices-create-btn"
+                variant="accent"
                 size="lg"
-                className="gap-2 w-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                className="gap-2 w-full transition-all duration-300"
               >
                 <Plus className="h-5 w-5" />
                 Create Invoice
@@ -520,37 +521,43 @@ export default function InvoicesPage() {
           {/* Scrollable Glass Stat Cards */}
           <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x justify-start sm:grid sm:grid-cols-4 sm:overflow-visible">
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Total</CardTitle>
-                  <FileText className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Total</CardTitle>
+                  <div className="p-1.5 bg-blue-500/15 dark:bg-blue-500/20 rounded-lg ring-1 ring-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                    <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <div className="text-2xl font-bold">{stats.total}</div>
+                  <div className="text-3xl font-black font-mono text-foreground">{stats.total}</div>
                 </CardContent>
               </Card>
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Paid</CardTitle>
-                  <DollarSign className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Paid</CardTitle>
+                  <div className="p-1.5 bg-emerald-500/15 dark:bg-emerald-500/20 rounded-lg ring-1 ring-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                    <DollarSign className="h-4 w-4 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <div className="text-2xl font-bold">{stats.paid}</div>
+                  <div className="text-3xl font-black font-mono text-foreground">{stats.paid}</div>
                 </CardContent>
               </Card>
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-chart-4/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Pending</CardTitle>
-                  <Calendar className="h-4 w-4 text-chart-4 opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Pending</CardTitle>
+                  <div className="p-1.5 bg-amber-500/15 dark:bg-amber-500/20 rounded-lg ring-1 ring-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+                    <Calendar className="h-4 w-4 text-amber-600 dark:text-amber-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <div className="text-2xl font-bold">{stats.pending}</div>
+                  <div className="text-3xl font-black font-mono text-foreground">{stats.pending}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -645,21 +652,27 @@ export default function InvoicesPage() {
             </div>
             <div className="sm:px-6 sm:pb-6">
               {filteredInvoices.length === 0 ? (
-                <div className="text-center py-16 px-4 bg-secondary/20 rounded-3xl border-2 border-dashed border-border/50 flex flex-col items-center justify-center">
-                  <div className="w-20 h-20 bg-background rounded-full flex items-center justify-center mb-6 shadow-sm ring-8 ring-primary/5">
-                    <FileText className="h-10 w-10 text-primary/60" />
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-24 px-4 bg-gradient-to-br from-card/80 to-card/30 backdrop-blur-xl rounded-[3rem] border border-white/20 dark:border-white/5 flex flex-col items-center justify-center shadow-xl relative overflow-hidden group"
+                >
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10 group-hover:bg-primary/20 transition-all duration-700" />
+                  <div className="w-24 h-24 bg-gradient-to-br from-background to-secondary rounded-3xl flex items-center justify-center mb-8 shadow-2xl ring-1 ring-white/10 relative overflow-hidden rotate-3 group-hover:rotate-6 transition-transform duration-500">
+                    <div className="absolute inset-0 bg-primary/5 blur-md" />
+                    <FileText className="h-10 w-10 text-primary relative z-10" />
                   </div>
-                  <h4 className="text-xl font-bold text-foreground mb-2">No invoices found</h4>
-                  <p className="text-sm text-muted-foreground mb-6 max-w-[250px]">
-                    You haven't created any invoices with these filters yet.
+                  <h4 className="text-3xl font-black text-foreground mb-3 font-sans">Time to make some money!</h4>
+                  <p className="text-base text-muted-foreground mb-8 max-w-[300px] leading-relaxed">
+                    You haven't created any invoices yet. Send your first invoice and start getting paid faster.
                   </p>
                   <Link href="/invoices/new">
-                    <Button className="gap-2 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all">
+                    <Button size="lg" className="gap-2 rounded-2xl shadow-[0_8px_24px_-8px_rgba(0,117,135,0.6)] hover:shadow-[0_12px_32px_-8px_rgba(0,117,135,0.8)] hover:-translate-y-1 transition-all duration-300 font-bold px-8">
                       <Plus className="h-5 w-5" />
-                      Create your first invoice
+                      Create First Invoice
                     </Button>
                   </Link>
-                </div>
+                </motion.div>
               ) : (
                 <div className="space-y-3">
                   {filteredInvoices.map((invoice, index) => {
@@ -691,7 +704,7 @@ export default function InvoicesPage() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap mb-1">
-                              <p className="font-bold text-foreground text-base leading-none">
+                              <p className="font-bold text-foreground text-base leading-none font-mono">
                                 {invoice.invoiceNumber}
                               </p>
                               <Badge
@@ -717,7 +730,7 @@ export default function InvoicesPage() {
                         </div>
                         <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6 pl-[64px] sm:pl-0">
                           <div className="text-left sm:text-right" onClick={() => handleView(invoice.id)}>
-                            <p className="font-bold text-foreground text-base sm:text-lg">
+                            <p className="font-bold text-foreground text-base sm:text-lg font-mono">
                               ${amount.toLocaleString()}
                             </p>
                             <p className="text-xs text-muted-foreground font-medium">

@@ -430,8 +430,9 @@ export default function QuotesPage() {
             <Link href="/quotes/new" className="w-full sm:w-auto">
               <Button
                 id="quotes-create-btn"
+                variant="accent"
                 size="lg"
-                className="gap-2 w-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                className="gap-2 w-full transition-all duration-300"
               >
                 <Plus className="h-5 w-5" />
                 Create Estimate
@@ -460,7 +461,9 @@ export default function QuotesPage() {
               <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
                   <CardTitle className="text-xs font-medium text-muted-foreground">Total</CardTitle>
-                  <FileCheck className="h-4 w-4 text-primary opacity-70" />
+                  <div className="p-1.5 bg-blue-500/15 dark:bg-blue-500/20 rounded-lg ring-1 ring-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                    <FileCheck className="h-4 w-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{stats.total}</div>
@@ -472,7 +475,9 @@ export default function QuotesPage() {
               <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
                   <CardTitle className="text-xs font-medium text-muted-foreground">Sent</CardTitle>
-                  <Send className="h-4 w-4 text-primary opacity-70" />
+                  <div className="p-1.5 bg-amber-500/15 dark:bg-amber-500/20 rounded-lg ring-1 ring-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+                    <Send className="h-4 w-4 text-amber-600 dark:text-amber-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{stats.sent}</div>
@@ -484,7 +489,9 @@ export default function QuotesPage() {
               <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
                   <CardTitle className="text-xs font-medium text-muted-foreground">Accepted</CardTitle>
-                  <DollarSign className="h-4 w-4 text-primary opacity-70" />
+                  <div className="p-1.5 bg-emerald-500/15 dark:bg-emerald-500/20 rounded-lg ring-1 ring-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                    <DollarSign className="h-4 w-4 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{stats.accepted}</div>

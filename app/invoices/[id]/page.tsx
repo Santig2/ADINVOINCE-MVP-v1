@@ -334,9 +334,38 @@ export default function InvoiceDetailPage() {
   if (loading) {
     return (
       <AppLayout>
-        <div className="container mx-auto px-6 py-8 max-w-5xl">
-          <div className="flex items-center justify-center h-64">
-            <p className="text-muted-foreground">Loading invoice...</p>
+        <div className="container mx-auto px-6 py-8 max-w-4xl">
+          <div className="animate-pulse space-y-8">
+            <div className="flex justify-between items-center mb-8">
+              <div className="h-10 w-10 bg-muted rounded-full"></div>
+              <div className="h-10 w-32 bg-muted rounded-xl"></div>
+            </div>
+            <Card className="bg-card border-border shadow-sm mx-auto max-w-4xl">
+              <CardHeader className="border-b border-border pb-6">
+                <div className="flex justify-between items-start">
+                  <div className="space-y-3">
+                    <div className="h-16 w-16 bg-muted rounded-xl"></div>
+                    <div className="h-6 w-48 bg-muted rounded"></div>
+                    <div className="h-4 w-32 bg-muted rounded"></div>
+                  </div>
+                  <div className="space-y-3 text-right">
+                    <div className="h-8 w-32 bg-muted rounded ml-auto"></div>
+                    <div className="h-4 w-24 bg-muted rounded ml-auto"></div>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-6 space-y-8">
+                <div className="space-y-3">
+                  <div className="h-4 w-24 bg-muted rounded"></div>
+                  <div className="h-6 w-48 bg-muted rounded"></div>
+                </div>
+                <div className="space-y-4">
+                  <div className="h-10 w-full bg-muted rounded-lg"></div>
+                  <div className="h-10 w-full bg-muted/50 rounded-lg"></div>
+                  <div className="h-10 w-full bg-muted/30 rounded-lg"></div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </AppLayout>
@@ -847,7 +876,8 @@ export default function InvoiceDetailPage() {
         </div>
 
         {/* Invoice Preview */}
-        <Card className="bg-card border-border">
+        <Card className="bg-card border-border shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] mx-auto max-w-4xl relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none border border-black/5 dark:border-white/5 rounded-xl" />
           <CardHeader className="border-b border-border">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-4">

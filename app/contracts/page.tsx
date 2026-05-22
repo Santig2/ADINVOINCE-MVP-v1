@@ -230,8 +230,9 @@ export default function ContractsPage() {
                         <Link href="/contracts/new" className="flex-1 sm:flex-none">
                             <Button
                                 id="contracts-create-btn"
+                                variant="accent"
                                 size="lg"
-                                className="gap-2 w-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                                className="gap-2 w-full transition-all duration-300"
                             >
                                 <Plus className="h-5 w-5" />
                                 Create Contract
@@ -256,12 +257,14 @@ export default function ContractsPage() {
 
                     <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x justify-start sm:grid sm:grid-cols-3 lg:grid-cols-4 sm:overflow-visible">
                         <motion.div variants={cardVariants} className="snap-start shrink-0">
-                            <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+                            <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-500/10 transition-all duration-300">
                                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                                    <CardTitle className="text-xs font-medium text-muted-foreground">
+                                    <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                         Drafts
                                     </CardTitle>
-                                    <PenTool className="h-4 w-4 text-muted-foreground opacity-70" />
+                                    <div className="p-1.5 bg-slate-500/15 dark:bg-slate-500/20 rounded-lg ring-1 ring-slate-500/20 shadow-[0_0_10px_rgba(100,116,139,0.1)]">
+                                        <PenTool className="h-4 w-4 text-slate-600 dark:text-slate-400 drop-shadow-sm" />
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0">
                                     <div className="text-xl font-bold">
@@ -272,12 +275,14 @@ export default function ContractsPage() {
                         </motion.div>
 
                         <motion.div variants={cardVariants} className="snap-start shrink-0">
-                            <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+                            <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
                                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                                    <CardTitle className="text-xs font-medium text-muted-foreground">
+                                    <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                         Sent
                                     </CardTitle>
-                                    <Send className="h-4 w-4 text-blue-500 opacity-70" />
+                                    <div className="p-1.5 bg-blue-500/15 dark:bg-blue-500/20 rounded-lg ring-1 ring-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                                        <Send className="h-4 w-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" />
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0">
                                     <div className="text-xl font-bold">
@@ -288,12 +293,14 @@ export default function ContractsPage() {
                         </motion.div>
 
                         <motion.div variants={cardVariants} className="snap-start shrink-0">
-                            <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+                            <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300">
                                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                                    <CardTitle className="text-xs font-medium text-muted-foreground">
+                                    <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                         Signed
                                     </CardTitle>
-                                    <CheckCircle className="h-4 w-4 text-green-500 opacity-70" />
+                                    <div className="p-1.5 bg-emerald-500/15 dark:bg-emerald-500/20 rounded-lg ring-1 ring-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                                        <CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0">
                                     <div className="text-xl font-bold">

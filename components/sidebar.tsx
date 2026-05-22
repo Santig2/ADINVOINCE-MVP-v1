@@ -62,7 +62,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   }, []);
 
   return (
-    <div className="flex h-full flex-col bg-card border-r border-border rounded-r-3xl overflow-hidden">
+    <div className="flex h-full flex-col bg-card/80 backdrop-blur-xl supports-[backdrop-filter]:bg-card/60 border-r border-white/10 dark:border-white/5 rounded-r-[2.5rem] overflow-hidden shadow-2xl">
       {/* Logo Section */}
       <div className="flex h-16 items-center gap-3 border-b border-border px-6">
         <Image
@@ -105,13 +105,16 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
               href={item.href}
               onClick={onNavigate}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-300 group",
                 isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  ? "bg-gradient-to-r from-primary/20 to-primary-light/5 text-primary shadow-[inset_4px_0_0_0_hsl(var(--primary))] dark:shadow-[inset_4px_0_0_0_hsl(var(--primary-light))] dark:text-primary-light"
+                  : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground hover:translate-x-1"
               )}
             >
-              <item.icon className="h-5 w-5" />
+              <item.icon className={cn(
+                "h-5 w-5 transition-transform duration-300", 
+                isActive ? "scale-110 drop-shadow-[0_0_8px_rgba(0,117,135,0.5)]" : "group-hover:scale-110"
+              )} />
               {item.name}
             </Link>
           );

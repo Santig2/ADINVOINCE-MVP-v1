@@ -235,8 +235,9 @@ export default function ExpensesPage() {
             <Link href="/expenses/new" className="w-full sm:w-auto">
               <Button
                 id="expenses-create-btn"
+                variant="accent"
                 size="lg"
-                className="gap-2 w-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                className="gap-2 w-full transition-all duration-300"
               >
                 <Plus className="h-5 w-5" />
                 Add Expense
@@ -262,10 +263,12 @@ export default function ExpensesPage() {
           {/* Scrollable Glass Stat Cards */}
           <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x justify-start sm:grid sm:grid-cols-4 sm:overflow-visible">
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">Total Expenses</CardTitle>
-                  <Receipt className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Total Expenses</CardTitle>
+                  <div className="p-1.5 bg-blue-500/15 dark:bg-blue-500/20 rounded-lg ring-1 ring-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                    <Receipt className="h-4 w-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{stats.total}</div>
@@ -274,10 +277,12 @@ export default function ExpensesPage() {
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">This Month</CardTitle>
-                  <Calendar className="h-4 w-4 text-chart-4 opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">This Month</CardTitle>
+                  <div className="p-1.5 bg-purple-500/15 dark:bg-purple-500/20 rounded-lg ring-1 ring-purple-500/20 shadow-[0_0_10px_rgba(168,85,247,0.1)]">
+                    <Calendar className="h-4 w-4 text-purple-600 dark:text-purple-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">{stats.thisMonth}</div>
@@ -286,10 +291,12 @@ export default function ExpensesPage() {
             </motion.div>
 
             <motion.div variants={cardVariants} className="snap-start shrink-0">
-              <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+              <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-500/10 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                  <CardTitle className="text-xs font-medium text-muted-foreground">This Month Amount</CardTitle>
-                  <DollarSign className="h-4 w-4 text-primary opacity-70" />
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">This Month Amount</CardTitle>
+                  <div className="p-1.5 bg-rose-500/15 dark:bg-rose-500/20 rounded-lg ring-1 ring-rose-500/20 shadow-[0_0_10px_rgba(244,63,94,0.1)]">
+                    <DollarSign className="h-4 w-4 text-rose-600 dark:text-rose-400 drop-shadow-sm" />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
                   <div className="text-2xl font-bold">${stats.thisMonthAmount.toLocaleString()}</div>

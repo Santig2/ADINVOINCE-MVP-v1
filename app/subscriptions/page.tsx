@@ -193,8 +193,9 @@ export default function SubscriptionsPage() {
                         <Link href="/subscriptions/new" className="flex-1 sm:flex-none">
                             <Button
                                 id="subscriptions-create-btn"
+                                variant="accent"
                                 size="lg"
-                                className="gap-2 w-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                                className="gap-2 w-full transition-all duration-300"
                             >
                                 <Plus className="h-5 w-5" />
                                 Add Subscription
@@ -219,12 +220,14 @@ export default function SubscriptionsPage() {
 
                     <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x justify-start sm:grid sm:grid-cols-3 lg:grid-cols-4 sm:overflow-visible">
                         <motion.div variants={cardVariants} className="snap-start shrink-0">
-                            <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+                            <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300">
                                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                                    <CardTitle className="text-xs font-medium text-muted-foreground">
+                                    <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                         Active
                                     </CardTitle>
-                                    <CheckCircle className="h-4 w-4 text-green-500 opacity-70" />
+                                    <div className="p-1.5 bg-emerald-500/15 dark:bg-emerald-500/20 rounded-lg ring-1 ring-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                                        <CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 drop-shadow-sm" />
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0">
                                     <div className="text-xl font-bold">
@@ -235,12 +238,14 @@ export default function SubscriptionsPage() {
                         </motion.div>
 
                         <motion.div variants={cardVariants} className="snap-start shrink-0">
-                            <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+                            <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300">
                                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                                    <CardTitle className="text-xs font-medium text-muted-foreground">
+                                    <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                         Paused
                                     </CardTitle>
-                                    <PauseCircle className="h-4 w-4 text-amber-500 opacity-70" />
+                                    <div className="p-1.5 bg-amber-500/15 dark:bg-amber-500/20 rounded-lg ring-1 ring-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+                                        <PauseCircle className="h-4 w-4 text-amber-600 dark:text-amber-400 drop-shadow-sm" />
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0">
                                     <div className="text-xl font-bold">
@@ -251,12 +256,14 @@ export default function SubscriptionsPage() {
                         </motion.div>
 
                         <motion.div variants={cardVariants} className="snap-start shrink-0">
-                            <Card className="bg-card/40 backdrop-blur-md border-border/50 min-w-[140px] sm:min-w-0 hover:bg-card/60 transition-colors">
+                            <Card className="bg-gradient-to-br from-card/60 to-card/20 backdrop-blur-2xl border-white/20 dark:border-white/10 min-w-[140px] sm:min-w-0 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-500/10 transition-all duration-300">
                                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4">
-                                    <CardTitle className="text-xs font-medium text-muted-foreground">
+                                    <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                         Canceled
                                     </CardTitle>
-                                    <XCircle className="h-4 w-4 text-red-500 opacity-70" />
+                                    <div className="p-1.5 bg-rose-500/15 dark:bg-rose-500/20 rounded-lg ring-1 ring-rose-500/20 shadow-[0_0_10px_rgba(244,63,94,0.1)]">
+                                        <XCircle className="h-4 w-4 text-rose-600 dark:text-rose-400 drop-shadow-sm" />
+                                    </div>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0">
                                     <div className="text-xl font-bold">

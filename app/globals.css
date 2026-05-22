@@ -18,6 +18,8 @@
   --popover-foreground: hsl(222.2, 84%, 4.9%);
   /* Using AdStrategic blue #007587 as primary color */
   --primary: hsl(188, 100%, 26%);
+  --primary-light: hsl(188, 100%, 40%);
+  --primary-dark: hsl(188, 100%, 15%);
   --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(210, 40%, 96.1%);
   --secondary-foreground: hsl(222.2, 47.4%, 11.2%);
@@ -25,6 +27,7 @@
   --muted-foreground: hsl(215.4, 16.3%, 46.9%);
   --accent: hsl(188, 100%, 26%);
   --accent-foreground: hsl(0, 0%, 100%);
+  --accent-warm: hsl(16, 100%, 60%);
   --destructive: hsl(0, 84.2%, 60.2%);
   --destructive-foreground: hsl(0, 0%, 100%);
   --border: hsl(214.3, 31.8%, 91.4%);
@@ -48,44 +51,47 @@
 
 .dark {
   /* Enhanced dark mode colors with better contrast and AdStrategic branding */
-  --background: hsl(222.2, 84%, 4.9%);
+  --background: hsl(200, 50%, 8%);
   --foreground: hsl(0, 0%, 100%);
-  --card: hsl(222.2, 84%, 4.9%);
+  --card: hsl(200, 45%, 10%);
   --card-foreground: hsl(0, 0%, 100%);
-  --popover: hsl(222.2, 84%, 4.9%);
+  --popover: hsl(200, 45%, 10%);
   --popover-foreground: hsl(0, 0%, 100%);
   /* Brighter AdStrategic blue for better dark mode visibility */
   --primary: hsl(188, 80%, 45%);
-  --primary-foreground: hsl(222.2, 84%, 4.9%);
-  --secondary: hsl(217.2, 32.6%, 17.5%);
+  --primary-light: hsl(188, 100%, 65%);
+  --primary-dark: hsl(188, 100%, 25%);
+  --primary-foreground: hsl(200, 50%, 8%);
+  --secondary: hsl(200, 40%, 15%);
   --secondary-foreground: hsl(210, 40%, 98%);
-  --muted: hsl(217.2, 32.6%, 17.5%);
+  --muted: hsl(200, 40%, 15%);
   --muted-foreground: hsl(215, 20.2%, 65.1%);
   --accent: hsl(188, 80%, 45%);
   --accent-foreground: hsl(210, 40%, 98%);
+  --accent-warm: hsl(16, 100%, 65%);
   --destructive: hsl(0, 62.8%, 30.6%);
   --destructive-foreground: hsl(0, 0%, 100%);
-  --border: hsl(217.2, 32.6%, 17.5%);
-  --input: hsl(217.2, 32.6%, 17.5%);
+  --border: hsl(200, 40%, 15%);
+  --input: hsl(200, 40%, 15%);
   --ring: hsl(188, 80%, 45%);
   --chart-1: hsl(188, 80%, 45%);
   --chart-2: hsl(160, 60%, 45%);
   --chart-3: hsl(30, 80%, 55%);
   --chart-4: hsl(280, 65%, 60%);
   --chart-5: hsl(340, 75%, 55%);
-  --sidebar: hsl(222.2, 84%, 4.9%);
+  --sidebar: hsl(200, 50%, 8%);
   --sidebar-foreground: hsl(0, 0%, 100%);
   --sidebar-primary: hsl(188, 80%, 45%);
-  --sidebar-primary-foreground: hsl(222.2, 84%, 4.9%);
-  --sidebar-accent: hsl(217.2, 32.6%, 17.5%);
+  --sidebar-primary-foreground: hsl(200, 50%, 8%);
+  --sidebar-accent: hsl(200, 40%, 15%);
   --sidebar-accent-foreground: hsl(210, 40%, 98%);
-  --sidebar-border: hsl(217.2, 32.6%, 17.5%);
+  --sidebar-border: hsl(200, 40%, 15%);
   --sidebar-ring: hsl(188, 80%, 45%);
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --font-sans: var(--font-sans), "Geist", "Geist Fallback";
+  --font-mono: var(--font-mono), "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -93,6 +99,8 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -100,6 +108,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-warm: var(--accent-warm);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);

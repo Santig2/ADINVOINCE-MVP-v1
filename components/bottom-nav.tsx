@@ -82,9 +82,10 @@ export function BottomNav() {
         <Link href="/voice-assistant" onClick={() => triggerHaptic("light")}>
           <motion.div
             whileTap={{ scale: 0.9 }}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-background border-2 border-primary/20 shadow-lg text-primary"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-background to-secondary border-2 border-primary/30 shadow-[0_4px_12px_rgba(0,117,135,0.2)] text-primary relative overflow-hidden group"
           >
-            <Mic className="h-5 w-5" />
+            <div className="absolute inset-0 bg-primary/5 blur-sm rounded-full group-hover:bg-primary/10 transition-colors" />
+            <Mic className="h-5 w-5 relative z-10" />
           </motion.div>
         </Link>
 
@@ -93,7 +94,7 @@ export function BottomNav() {
             <motion.div
               whileTap={{ scale: 0.9 }}
               onClick={() => triggerHaptic("medium")}
-              className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary/90 to-primary text-primary-foreground shadow-lg shadow-primary/30 cursor-pointer"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary-dark via-primary to-primary-light text-primary-foreground shadow-[0_8px_20px_rgba(0,117,135,0.4)] hover:shadow-[0_12px_25px_rgba(0,117,135,0.6)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             >
               <Plus className="h-6 w-6" />
             </motion.div>
@@ -151,7 +152,7 @@ export function BottomNav() {
       </div>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 flex h-20 items-center justify-around px-2 sm:px-4 rounded-t-3xl border-t border-border bg-background/95 pb-2 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 flex h-20 items-center justify-around px-2 sm:px-4 rounded-t-[2.5rem] border-t border-white/20 dark:border-white/5 bg-background/80 pb-2 backdrop-blur-3xl shadow-[0_-15px_40px_rgba(0,0,0,0.08)] md:hidden">
         {mainNavItems.map((item) => {
           const active = isActive(item.href, item.matchMode)
           return (
@@ -205,10 +206,11 @@ export function BottomNav() {
                   onClick={() => { triggerHaptic("light"); setIsMoreMenuOpen(false) }}
                   className="flex flex-col items-center gap-2 group"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary group-hover:bg-primary/10 transition-colors">
-                    <item.icon className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-gradient-to-br from-primary-light/10 to-primary/5 backdrop-blur-xl border border-primary/20 shadow-[0_4px_12px_rgba(0,117,135,0.1)] group-hover:shadow-[0_8px_20px_rgba(0,117,135,0.25)] group-hover:-translate-y-1 group-hover:from-primary-light/20 group-hover:to-primary/10 transition-all duration-300 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-white/20 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <item.icon className="h-6 w-6 text-primary drop-shadow-sm group-hover:scale-110 transition-transform duration-300 relative z-10" />
                   </div>
-                  <span className="text-xs font-medium text-center leading-tight">
+                  <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors text-center leading-tight">
                     {item.name}
                   </span>
                 </Link>
