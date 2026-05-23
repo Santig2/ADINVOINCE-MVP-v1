@@ -23,6 +23,11 @@ import {
   Bell,
   HelpCircle,
   Menu,
+  Languages,
+  LayoutTemplate,
+  Store,
+  IdCard,
+  Star,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -44,6 +49,7 @@ const mainNavItems = [
 
 const moreNavItems = [
   { name: "Advances", href: "/advances", icon: ClipboardList, colorClass: "from-cyan-500/10 to-cyan-500/5 border-cyan-500/20 text-cyan-500 group-hover:from-cyan-500/20 group-hover:to-cyan-500/10 group-hover:shadow-cyan-500/25", textHover: "group-hover:text-cyan-500" },
+  { name: "Translator", href: "/translator", icon: Languages, colorClass: "from-blue-400/10 to-blue-400/5 border-blue-400/20 text-blue-400 group-hover:from-blue-400/20 group-hover:to-blue-400/10 group-hover:shadow-blue-400/25", textHover: "group-hover:text-blue-400" },
   { name: "Contracts", href: "/contracts", icon: PenTool, colorClass: "from-indigo-500/10 to-indigo-500/5 border-indigo-500/20 text-indigo-500 group-hover:from-indigo-500/20 group-hover:to-indigo-500/10 group-hover:shadow-indigo-500/25", textHover: "group-hover:text-indigo-500" },
   { name: "Subscriptions", href: "/subscriptions", icon: CalendarClock, colorClass: "from-emerald-500/10 to-emerald-500/5 border-emerald-500/20 text-emerald-500 group-hover:from-emerald-500/20 group-hover:to-emerald-500/10 group-hover:shadow-emerald-500/25", textHover: "group-hover:text-emerald-500" },
   { name: "Payments", href: "/payments", icon: CreditCard, colorClass: "from-amber-500/10 to-amber-500/5 border-amber-500/20 text-amber-500 group-hover:from-amber-500/20 group-hover:to-amber-500/10 group-hover:shadow-amber-500/25", textHover: "group-hover:text-amber-500" },

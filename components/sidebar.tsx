@@ -29,6 +29,11 @@ import {
   CalendarClock,
   ClipboardList,
   Mic,
+  Languages,
+  LayoutTemplate,
+  Store,
+  IdCard,
+  Star,
 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { useAuth } from "@/components/auth-provider";
@@ -37,6 +42,7 @@ import { GlobalSearch } from "@/components/global-search";
 const navigation = [
   { name: "Dashboard", href: "/?mode=dashboard", icon: LayoutDashboard },
   { name: "Voice Assistant", href: "/voice-assistant", icon: Mic },
+  { name: "Translator", href: "/translator", icon: Languages },
   { name: "Advances", href: "/advances", icon: ClipboardList },
   { name: "Invoices", href: "/invoices", icon: FileText },
   { name: "Quotes", href: "/quotes", icon: FileCheck },
