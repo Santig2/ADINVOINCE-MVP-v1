@@ -18,14 +18,14 @@ import {
 import Image from "next/image"
 
 const templates = [
-  { id: 't1', name: "Standard Pro", category: "General", icon: LayoutTemplate, color: "text-blue-500", bg: "bg-blue-500/10" },
-  { id: 't2', name: "Clean Minimal", category: "General", icon: LayoutTemplate, color: "text-gray-500", bg: "bg-gray-500/10" },
-  { id: 't3', name: "Plumbing Expert", category: "Plumbing", icon: Droplets, color: "text-cyan-500", bg: "bg-cyan-500/10" },
-  { id: 't4', name: "Electrician Sparks", category: "Electrical", icon: Zap, color: "text-yellow-500", bg: "bg-yellow-500/10" },
-  { id: 't5', name: "HVAC Cool Breeze", category: "HVAC", icon: Wrench, color: "text-orange-500", bg: "bg-orange-500/10" },
-  { id: 't6', name: "Beauty Salon", category: "Beauty", icon: Scissors, color: "text-pink-500", bg: "bg-pink-500/10" },
-  { id: 't7', name: "Auto Repair", category: "Automotive", icon: Car, color: "text-red-500", bg: "bg-red-500/10" },
-  { id: 't8', name: "Landscaping", category: "Home Services", icon: Home, color: "text-green-500", bg: "bg-green-500/10" },
+  { id: 't1', name: "Standard Pro", category: "General", icon: LayoutTemplate, color: "text-blue-500", bg: "bg-blue-500/10", theme: "bg-white text-black", table: "border-slate-100", textPrimary: "text-slate-800", textSecondary: "text-slate-500", textMuted: "text-slate-400", accent: "bg-slate-50" },
+  { id: 't2', name: "Clean Minimal", category: "General", icon: LayoutTemplate, color: "text-slate-700", bg: "bg-slate-500/10", theme: "bg-gradient-to-br from-slate-100 to-slate-200 text-slate-900", table: "border-slate-200", textPrimary: "text-slate-900", textSecondary: "text-slate-600", textMuted: "text-slate-500", accent: "bg-white/50" },
+  { id: 't3', name: "Plumbing Expert", category: "Plumbing", icon: Droplets, color: "text-cyan-400", bg: "bg-cyan-500/20", theme: "bg-gradient-to-br from-slate-900 via-blue-950 to-cyan-950 text-white", table: "border-white/10", textPrimary: "text-white", textSecondary: "text-blue-100/70", textMuted: "text-blue-200/40", accent: "bg-white/5" },
+  { id: 't4', name: "Electrician Sparks", category: "Electrical", icon: Zap, color: "text-yellow-400", bg: "bg-yellow-500/20", theme: "bg-gradient-to-br from-zinc-900 to-zinc-950 text-white", table: "border-white/10", textPrimary: "text-white", textSecondary: "text-zinc-300", textMuted: "text-zinc-500", accent: "bg-white/5" },
+  { id: 't5', name: "HVAC Cool Breeze", category: "HVAC", icon: Wrench, color: "text-orange-400", bg: "bg-orange-500/20", theme: "bg-gradient-to-br from-slate-900 to-orange-950/40 text-white", table: "border-white/10", textPrimary: "text-white", textSecondary: "text-orange-100/70", textMuted: "text-orange-200/40", accent: "bg-white/5" },
+  { id: 't6', name: "Beauty Salon", category: "Beauty", icon: Scissors, color: "text-pink-600", bg: "bg-pink-500/20", theme: "bg-gradient-to-br from-pink-50 to-rose-100 text-slate-900", table: "border-pink-200", textPrimary: "text-slate-900", textSecondary: "text-slate-600", textMuted: "text-slate-400", accent: "bg-white/50" },
+  { id: 't7', name: "Auto Repair", category: "Automotive", icon: Car, color: "text-red-400", bg: "bg-red-500/20", theme: "bg-gradient-to-br from-neutral-900 to-neutral-950 text-white", table: "border-white/10", textPrimary: "text-white", textSecondary: "text-neutral-300", textMuted: "text-neutral-500", accent: "bg-white/5" },
+  { id: 't8', name: "Landscaping", category: "Home Services", icon: Home, color: "text-green-400", bg: "bg-green-500/20", theme: "bg-gradient-to-br from-emerald-950 to-green-900 text-white", table: "border-white/10", textPrimary: "text-white", textSecondary: "text-green-100/70", textMuted: "text-green-200/40", accent: "bg-white/5" },
 ]
 
 export default function TemplatesPage() {
@@ -136,37 +136,98 @@ export default function TemplatesPage() {
           </DialogHeader>
           {previewTemplate && (
             <div className="flex flex-col gap-6">
-              <div className="aspect-[1/1.4] bg-secondary rounded-xl border border-border shadow-inner p-8 flex flex-col relative overflow-hidden">
-                 <div className={`absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full ${previewTemplate.bg} opacity-50`} />
-                 <div className="flex justify-between items-start mb-10">
-                    <div className={`w-16 h-16 rounded-2xl ${previewTemplate.bg} ${previewTemplate.color} flex items-center justify-center`}>
-                      <previewTemplate.icon className="w-8 h-8" />
+              <div className={`aspect-[1/1.4] ${previewTemplate.theme} rounded-xl border border-border shadow-2xl p-8 flex flex-col relative overflow-hidden`}>
+                 {/* Top Colored Bar */}
+                 <div className={`absolute top-0 left-0 w-full h-3 ${previewTemplate.bg} opacity-80`} />
+                 
+                 {/* Header */}
+                 <div className="flex justify-between items-start mb-8 mt-2">
+                    <div className="flex gap-3 items-center">
+                      <div className={`w-12 h-12 rounded-xl ${previewTemplate.bg} ${previewTemplate.color} flex items-center justify-center backdrop-blur-md border border-white/10`}>
+                        <previewTemplate.icon className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className={`font-bold text-lg leading-tight ${previewTemplate.textPrimary}`}>{previewTemplate.name}</h3>
+                        <p className={`text-xs ${previewTemplate.textSecondary}`}>Professional Services</p>
+                      </div>
                     </div>
                     <div className="text-right">
-                      <h2 className="text-2xl font-black opacity-20 uppercase tracking-widest">INVOICE</h2>
-                      <p className="text-sm font-medium mt-1">#INV-001</p>
+                      <h2 className={`text-3xl font-black uppercase tracking-widest opacity-20`}>INVOICE</h2>
+                      <p className={`text-sm font-semibold mt-1 ${previewTemplate.textSecondary}`}>#INV-2024-001</p>
                     </div>
                  </div>
-                 <div className="w-1/2 space-y-2 mb-10">
-                   <div className="h-2 w-full bg-muted-foreground/20 rounded-full" />
-                   <div className="h-2 w-3/4 bg-muted-foreground/20 rounded-full" />
-                   <div className="h-2 w-1/2 bg-muted-foreground/20 rounded-full" />
+                 
+                 {/* Billing Info */}
+                 <div className="flex justify-between mb-8 text-sm">
+                   <div>
+                     <p className={`text-xs font-bold uppercase mb-1 ${previewTemplate.textMuted}`}>Bill To:</p>
+                     <p className={`font-semibold ${previewTemplate.textPrimary}`}>Acme Corporation</p>
+                     <p className={previewTemplate.textSecondary}>123 Business Rd.</p>
+                     <p className={previewTemplate.textSecondary}>Suite 100, City</p>
+                   </div>
+                   <div className="text-right">
+                     <p className={`text-xs font-bold uppercase mb-1 ${previewTemplate.textMuted}`}>Date:</p>
+                     <p className={`font-semibold ${previewTemplate.textPrimary}`}>Oct 24, 2024</p>
+                     <p className={`text-xs font-bold uppercase mt-2 mb-1 ${previewTemplate.textMuted}`}>Due Date:</p>
+                     <p className={`font-semibold ${previewTemplate.textPrimary}`}>Nov 24, 2024</p>
+                   </div>
                  </div>
-                 <div className="flex-1 bg-background rounded-lg border border-border/50 p-4 shadow-sm space-y-4">
-                   <div className="flex justify-between border-b pb-2">
-                     <div className="h-3 w-1/4 bg-muted-foreground/30 rounded-full" />
-                     <div className="h-3 w-1/6 bg-muted-foreground/30 rounded-full" />
-                   </div>
-                   {[1,2,3].map(i => (
-                     <div key={i} className="flex justify-between">
-                       <div className="h-2 w-1/3 bg-muted-foreground/10 rounded-full" />
-                       <div className="h-2 w-1/6 bg-muted-foreground/10 rounded-full" />
+
+                 {/* Table */}
+                 <div className="flex-1">
+                   <table className="w-full text-sm">
+                     <thead>
+                       <tr className={`border-b-2 ${previewTemplate.table} ${previewTemplate.textMuted}`}>
+                         <th className="text-left pb-2 font-semibold">Description</th>
+                         <th className="text-center pb-2 font-semibold">Qty</th>
+                         <th className="text-right pb-2 font-semibold">Price</th>
+                         <th className="text-right pb-2 font-semibold">Total</th>
+                       </tr>
+                     </thead>
+                     <tbody className={previewTemplate.textSecondary}>
+                       <tr className={`border-b ${previewTemplate.table} ${previewTemplate.accent}`}>
+                         <td className="py-3 px-2 rounded-l-lg">Standard Service Call</td>
+                         <td className="py-3 text-center">1</td>
+                         <td className="py-3 text-right">$150.00</td>
+                         <td className={`py-3 px-2 text-right font-medium rounded-r-lg ${previewTemplate.textPrimary}`}>$150.00</td>
+                       </tr>
+                       <tr className={`border-b ${previewTemplate.table}`}>
+                         <td className="py-3 px-2">Parts and Materials</td>
+                         <td className="py-3 text-center">1</td>
+                         <td className="py-3 text-right">$85.00</td>
+                         <td className={`py-3 px-2 text-right font-medium ${previewTemplate.textPrimary}`}>$85.00</td>
+                       </tr>
+                       <tr className={`border-b ${previewTemplate.table} ${previewTemplate.accent}`}>
+                         <td className="py-3 px-2 rounded-l-lg">Labor (Hours)</td>
+                         <td className="py-3 text-center">2</td>
+                         <td className="py-3 text-right">$65.00</td>
+                         <td className={`py-3 px-2 text-right font-medium rounded-r-lg ${previewTemplate.textPrimary}`}>$130.00</td>
+                       </tr>
+                     </tbody>
+                   </table>
+                 </div>
+
+                 {/* Totals */}
+                 <div className={`flex justify-end pt-4 mb-8 border-t ${previewTemplate.table}`}>
+                   <div className="w-1/2 space-y-2 text-sm">
+                     <div className={`flex justify-between ${previewTemplate.textSecondary}`}>
+                       <span>Subtotal</span>
+                       <span>$365.00</span>
                      </div>
-                   ))}
-                   <div className="pt-4 flex justify-between font-bold">
-                     <span className="text-sm">Total</span>
-                     <span className="text-sm">$450.00</span>
+                     <div className={`flex justify-between ${previewTemplate.textSecondary}`}>
+                       <span>Tax (10%)</span>
+                       <span>$36.50</span>
+                     </div>
+                     <div className={`flex justify-between font-bold text-lg pt-2 border-t ${previewTemplate.table} ${previewTemplate.textPrimary}`}>
+                       <span>Total Due</span>
+                       <span className={previewTemplate.color.replace('text-', 'text-')}>$401.50</span>
+                     </div>
                    </div>
+                 </div>
+
+                 {/* Footer */}
+                 <div className={`mt-auto text-center border-t ${previewTemplate.table} pt-4`}>
+                   <p className={`text-xs font-medium ${previewTemplate.textMuted}`}>Thank you for your business!</p>
                  </div>
               </div>
               <Button 

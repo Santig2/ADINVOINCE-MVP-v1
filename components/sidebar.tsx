@@ -53,6 +53,10 @@ const navigation = [
   { name: "Clients", href: "/clients", icon: Users },
   { name: "Catalog", href: "/catalog", icon: Package },
   { name: "Reminders", href: "/reminders", icon: Bell },
+  { name: "Templates", href: "/templates", icon: LayoutTemplate },
+  { name: "Marketplace", href: "/marketplace", icon: Store },
+  { name: "Business Card", href: "/business-card", icon: IdCard },
+  { name: "Reputation", href: "/reputation", icon: Star },
   { name: "Ask Me How", href: "/ask-me-how", icon: HelpCircle },
   { name: "Configuration", href: "/configuration", icon: Settings },
 ];

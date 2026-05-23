@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { IdCard, QrCode, ScanLine, Share2, Download, Palette, Link as LinkIcon, Edit3 } from "lucide-react"
-import { motion } from "framer-motion"
+import { IdCard, QrCode, ScanLine, Share2, Download, Palette, Link as LinkIcon, Edit3, Smartphone, Briefcase, PlusCircle, CheckCircle2, Instagram, Facebook, Linkedin, Twitter } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
 import {
@@ -17,19 +17,32 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+const nicheTemplates = {
+  plumbing: { profession: "Master Plumber", color: "from-[#0f172a] via-[#1e3a8a] to-[#0f172a]", accent: "bg-blue-500/20" },
+  electrician: { profession: "Licensed Electrician", color: "from-[#18181b] via-[#451a03] to-[#78350f]", accent: "bg-yellow-500/20" },
+  real_estate: { profession: "Real Estate Broker", color: "from-[#022c22] via-[#064e3b] to-[#022c22]", accent: "bg-emerald-500/20" },
+  it_services: { profession: "IT Consultant", color: "from-[#1e1b4b] via-[#312e81] to-[#1e1b4b]", accent: "bg-indigo-500/20" },
+}
 
 export default function BusinessCardPage() {
   const { toast } = useToast()
   const [isEditing, setIsEditing] = useState(false)
   const [cardData, setCardData] = useState({
     name: "John Doe",
+    niche: "plumbing",
     profession: "Master Plumber",
     phone: "+1 (555) 123-4567",
     email: "john@doeplumbing.com",
     website: "www.doeplumbing.com",
-    color: "from-slate-900 to-slate-800",
-    accent: "bg-cyan-500/20"
+    socialNetwork: "instagram",
+    socialHandle: "@doeplumbing",
+    color: "from-[#0f172a] via-[#1e3a8a] to-[#0f172a]",
+    accent: "bg-blue-500/20"
   })
+  
+  const [walletAdded, setWalletAdded] = useState(false)
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,6 +51,32 @@ export default function BusinessCardPage() {
       title: "Card Updated",
       description: "Your digital business card has been updated successfully."
     })
+  }
+
+  const handleNicheChange = (val: string) => {
+    const tpl = nicheTemplates[val as keyof typeof nicheTemplates]
+    setCardData({
+      ...cardData,
+      niche: val,
+      profession: tpl.profession,
+      color: tpl.color,
+      accent: tpl.accent
+    })
+  }
+
+  const handleAddToWallet = () => {
+    setWalletAdded(true)
+    toast({ title: "Added to Apple Wallet", description: "Your card is now available in your digital wallet." })
+  }
+
+  const renderSocialIcon = (network: string, className: string) => {
+    switch (network) {
+      case "instagram": return <Instagram className={className} />;
+      case "facebook": return <Facebook className={className} />;
+      case "linkedin": return <Linkedin className={className} />;
+      case "twitter": return <Twitter className={className} />;
+      default: return null;
+    }
   }
 
   return (
@@ -49,13 +88,10 @@ export default function BusinessCardPage() {
               <IdCard className="w-8 h-8" />
             </div>
             <div>
-              <h1 className="text-3xl md:text-4xl font-black text-foreground">Business Cards</h1>
-              <p className="text-muted-foreground mt-1">Smart digital cards to network faster and better.</p>
+              <h1 className="text-3xl md:text-4xl font-black text-foreground">Digital Business Card</h1>
+              <p className="text-muted-foreground mt-1">Design, share, and add to your digital wallet instantly.</p>
             </div>
           </div>
-          <Badge className="bg-primary/20 text-primary hover:bg-primary/30 py-1.5 px-4 rounded-full font-bold">
-            EN DESARROLLO
-          </Badge>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -71,48 +107,68 @@ export default function BusinessCardPage() {
             
             {/* Mock Business Card */}
             <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative group perspective">
-              <div className={`w-full aspect-[1.586/1] bg-gradient-to-br ${cardData.color} rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden transform transition-all duration-500 group-hover:shadow-primary/30`}>
-                {/* Decorative background elements */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-                <div className={`absolute bottom-0 left-0 w-48 h-48 ${cardData.accent} rounded-full blur-3xl translate-y-1/3 -translate-x-1/4`} />
+              <div className={`w-full aspect-[1.586/1] bg-gradient-to-br ${cardData.color} rounded-[2rem] text-white shadow-2xl relative overflow-hidden transform transition-all duration-500 group-hover:shadow-primary/40 flex flex-col`}>
                 
-                <div className="relative z-10 h-full flex flex-col justify-between">
+                {/* Decorative background elements */}
+                <div className="absolute top-[-20%] right-[-10%] w-3/4 h-3/4 bg-white/5 rounded-full blur-3xl" />
+                <div className={`absolute bottom-[-20%] left-[-10%] w-1/2 h-1/2 ${cardData.accent} rounded-full blur-3xl`} />
+                
+                {/* Top Section */}
+                <div className="flex-1 p-8 relative z-10 flex flex-col justify-between">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-2xl font-black tracking-tight">{cardData.name}</h3>
-                      <p className="text-white/70 font-medium mt-1">{cardData.profession}</p>
+                      <h3 className="text-3xl font-black tracking-tight drop-shadow-md">{cardData.name}</h3>
+                      <p className="text-white/80 font-medium mt-1 uppercase tracking-wider text-xs">{cardData.profession}</p>
                     </div>
-                    <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center">
-                      <IdCard className="w-6 h-6 text-white" />
+                    <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center shadow-inner">
+                      <IdCard className="w-7 h-7 text-white" />
                     </div>
                   </div>
-                  
-                  <div className="flex justify-between items-end">
-                    <div className="space-y-1 text-sm text-white/80">
-                      <p>{cardData.phone}</p>
-                      <p>{cardData.email}</p>
-                      <p>{cardData.website}</p>
-                    </div>
-                    <div className="w-20 h-20 bg-white p-1 rounded-lg">
-                      <div className="w-full h-full border-2 border-dashed border-slate-300 flex items-center justify-center">
-                        <QrCode className="w-10 h-10 text-slate-800" />
+                </div>
+
+                {/* Bottom Section (Glassmorphism Footer) */}
+                <div className="h-[45%] w-full bg-black/20 backdrop-blur-xl border-t border-white/10 p-6 px-8 flex justify-between items-end relative z-10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]">
+                  <div className="space-y-1.5 text-xs text-white/90">
+                    <p className="flex items-center gap-2"><span className="w-4 flex justify-center opacity-70">📱</span> {cardData.phone}</p>
+                    <p className="flex items-center gap-2"><span className="w-4 flex justify-center opacity-70">✉️</span> {cardData.email}</p>
+                    <p className="flex items-center gap-2"><span className="w-4 flex justify-center opacity-70">🌐</span> {cardData.website}</p>
+                    {cardData.socialHandle && (
+                      <div className="flex items-center gap-2 mt-2 font-medium text-white">
+                        <span className="w-4 flex justify-center opacity-90">{renderSocialIcon(cardData.socialNetwork, "w-4 h-4")}</span>
+                        <span>{cardData.socialHandle}</span>
                       </div>
+                    )}
+                  </div>
+                  
+                  {/* QR Code Container styled like a chip/scan zone */}
+                  <div className="w-20 h-20 bg-white/90 p-1.5 rounded-xl shadow-lg transform rotate-[-2deg] group-hover:rotate-0 transition-transform duration-300">
+                    <div className="w-full h-full border-2 border-dashed border-slate-400 rounded-lg flex items-center justify-center bg-white">
+                      <QrCode className="w-12 h-12 text-slate-800" />
                     </div>
                   </div>
                 </div>
               </div>
             </motion.div>
 
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button onClick={handleAddToWallet} disabled={walletAdded} className="flex-1 rounded-full h-12 bg-black hover:bg-black/80 text-white font-semibold transition-all">
+                {walletAdded ? (
+                   <><CheckCircle2 className="w-5 h-5 mr-2 text-green-400" /> Added to Wallet</>
+                ) : (
+                   <><Smartphone className="w-5 h-5 mr-2" /> Add to Apple Wallet</>
+                )}
+              </Button>
+            </div>
             <div className="flex gap-3 justify-center sm:justify-start">
               <Button className="bg-primary hover:bg-primary/90 text-white rounded-full flex-1 sm:flex-none">
                 <Share2 className="w-4 h-4 mr-2" />
-                Share
+                Share QR
               </Button>
-              <Button variant="outline" className="rounded-full flex-1 sm:flex-none">
+              <Button variant="outline" className="rounded-full flex-1 sm:flex-none border-primary/20 hover:bg-primary/5">
                 <Download className="w-4 h-4 mr-2" />
-                Save PDF
+                Save Image
               </Button>
-              <Button variant="outline" size="icon" className="rounded-full shrink-0">
+              <Button variant="outline" size="icon" className="rounded-full shrink-0 border-primary/20 hover:bg-primary/5">
                 <LinkIcon className="w-4 h-4" />
               </Button>
             </div>
@@ -120,86 +176,92 @@ export default function BusinessCardPage() {
 
           {/* Tools & Features */}
           <div className="space-y-4">
-            <h2 className="text-xl font-bold">Tools</h2>
+            <h2 className="text-xl font-bold flex items-center gap-2"><Briefcase className="w-5 h-5 text-primary" /> Profile Settings</h2>
             
-            <Card className="hover:border-primary/50 transition-colors cursor-pointer group bg-card/50 backdrop-blur-sm">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Palette className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-1">Custom Branding</h3>
-                  <p className="text-sm text-muted-foreground">Modify colors, fonts, and layout to match your business identity perfectly.</p>
-                </div>
+            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+              <CardContent className="p-6">
+                <form onSubmit={handleSave} className="space-y-4">
+                  <div className="grid gap-2">
+                    <Label className="text-muted-foreground font-semibold">Business Niche Template</Label>
+                    <Select value={cardData.niche} onValueChange={handleNicheChange}>
+                      <SelectTrigger className="bg-background border-primary/20 focus:ring-primary/50">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="plumbing">💧 Plumbing & Water Services</SelectItem>
+                        <SelectItem value="electrician">⚡ Electrical Services</SelectItem>
+                        <SelectItem value="real_estate">🏠 Real Estate & Brokers</SelectItem>
+                        <SelectItem value="it_services">💻 IT & Tech Consulting</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="grid gap-2">
+                      <Label>Full Name</Label>
+                      <Input value={cardData.name} onChange={e => setCardData({...cardData, name: e.target.value})} className="bg-background" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label>Job Title / Profession</Label>
+                      <Input value={cardData.profession} onChange={e => setCardData({...cardData, profession: e.target.value})} className="bg-background" />
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="grid gap-2">
+                      <Label>Phone Number</Label>
+                      <Input value={cardData.phone} onChange={e => setCardData({...cardData, phone: e.target.value})} className="bg-background" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label>Email Address</Label>
+                      <Input type="email" value={cardData.email} onChange={e => setCardData({...cardData, email: e.target.value})} className="bg-background" />
+                    </div>
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label>Website URL</Label>
+                    <Input value={cardData.website} onChange={e => setCardData({...cardData, website: e.target.value})} className="bg-background" />
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="grid gap-2">
+                      <Label>Social Network</Label>
+                      <Select value={cardData.socialNetwork} onValueChange={(val) => setCardData({...cardData, socialNetwork: val})}>
+                        <SelectTrigger className="bg-background border-primary/20 focus:ring-primary/50">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="instagram">Instagram</SelectItem>
+                          <SelectItem value="facebook">Facebook</SelectItem>
+                          <SelectItem value="twitter">Twitter / X</SelectItem>
+                          <SelectItem value="linkedin">LinkedIn</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="grid gap-2">
+                      <Label>Social Handle / Link</Label>
+                      <Input value={cardData.socialHandle} onChange={e => setCardData({...cardData, socialHandle: e.target.value})} className="bg-background" placeholder="@username" />
+                    </div>
+                  </div>
+                </form>
               </CardContent>
             </Card>
-
-            <Card className="hover:border-primary/50 transition-colors cursor-pointer group bg-card/50 backdrop-blur-sm">
+            
+            <Card className="bg-primary/5 border-primary/20">
               <CardContent className="p-6 flex items-start gap-4">
-                <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <ScanLine className="w-6 h-6 text-blue-500" />
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
+                  <ScanLine className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg mb-1">Scan Existing Cards</h3>
-                  <p className="text-sm text-muted-foreground">Use AI to scan physical cards and automatically extract the information to your contacts.</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:border-primary/50 transition-colors cursor-pointer group bg-card/50 backdrop-blur-sm">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Share2 className="w-6 h-6 text-green-500" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-1">Smart Distribution</h3>
-                  <p className="text-sm text-muted-foreground">Share via QR, NFC, text message, or email. Track how many times your card is viewed.</p>
+                  <h3 className="font-bold text-lg mb-1">NFC Tap Enabled</h3>
+                  <p className="text-sm text-muted-foreground">Order a physical NFC card linked to this profile. Tap it on any phone to share your details instantly.</p>
+                  <Button variant="link" className="px-0 mt-1 h-auto text-primary">Order Physical Card &rarr;</Button>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
-
-      <Dialog open={isEditing} onOpenChange={setIsEditing}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit Business Card</DialogTitle>
-            <DialogDescription>Update the information displayed on your digital card.</DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handleSave} className="space-y-4">
-            <div className="grid gap-2">
-              <Label>Name</Label>
-              <Input value={cardData.name} onChange={e => setCardData({...cardData, name: e.target.value})} />
-            </div>
-            <div className="grid gap-2">
-              <Label>Profession / Title</Label>
-              <Input value={cardData.profession} onChange={e => setCardData({...cardData, profession: e.target.value})} />
-            </div>
-            <div className="grid gap-2">
-              <Label>Phone</Label>
-              <Input value={cardData.phone} onChange={e => setCardData({...cardData, phone: e.target.value})} />
-            </div>
-            <div className="grid gap-2">
-              <Label>Email</Label>
-              <Input type="email" value={cardData.email} onChange={e => setCardData({...cardData, email: e.target.value})} />
-            </div>
-            <div className="grid gap-2">
-              <Label>Website</Label>
-              <Input value={cardData.website} onChange={e => setCardData({...cardData, website: e.target.value})} />
-            </div>
-            <div className="grid gap-2">
-              <Label>Theme Color</Label>
-              <div className="flex gap-2">
-                <div onClick={() => setCardData({...cardData, color: 'from-slate-900 to-slate-800', accent: 'bg-cyan-500/20'})} className={`w-8 h-8 rounded-full bg-slate-800 cursor-pointer ${cardData.color.includes('slate') ? 'ring-2 ring-primary ring-offset-2' : ''}`} />
-                <div onClick={() => setCardData({...cardData, color: 'from-blue-900 to-blue-700', accent: 'bg-blue-400/20'})} className={`w-8 h-8 rounded-full bg-blue-800 cursor-pointer ${cardData.color.includes('blue') ? 'ring-2 ring-primary ring-offset-2' : ''}`} />
-                <div onClick={() => setCardData({...cardData, color: 'from-orange-600 to-orange-400', accent: 'bg-yellow-300/20'})} className={`w-8 h-8 rounded-full bg-orange-500 cursor-pointer ${cardData.color.includes('orange') ? 'ring-2 ring-primary ring-offset-2' : ''}`} />
-              </div>
-            </div>
-            <Button type="submit" className="w-full mt-4">Save Changes</Button>
-          </form>
-        </DialogContent>
-      </Dialog>
     </AppLayout>
   )
 }
