@@ -48,6 +48,7 @@ import { useToast } from "@/hooks/use-toast";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { TemplateSelectionDialog } from "@/components/template-selection-dialog";
+import { ShareLinkDialog } from "@/components/share-link-dialog";
 import { cn } from "@/lib/utils";
 
 type InvoiceItem = {
@@ -126,6 +127,8 @@ export default function NewInvoicePage() {
   const [showDraftDialog, setShowDraftDialog] = useState(false);
   const [showTemplateDialog, setShowTemplateDialog] = useState(false);
   const [showSaveTemplateDialog, setShowSaveTemplateDialog] = useState(false);
+  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [createdDocumentId, setCreatedDocumentId] = useState("");
   const [templateName, setTemplateName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const invoicePreviewRef = useRef<HTMLDivElement>(null);
@@ -1081,25 +1084,24 @@ export default function NewInvoicePage() {
     }
 
     setShowSendDialog(false);
-    setShowSuccessDialog(true);
-
-    setTimeout(() => {
-      setShowSuccessDialog(false);
-      setInvoiceNumber("INV-008");
-      setClientName("");
-      setClientContact("");
-      setClientEmail("");
-      setClientAddress("");
-      setClientPhone("");
-      setSelectedClientId("");
-      setItems([
-        { id: "1", description: "", quantity: 1, unitPrice: 0, tax: 0 },
-      ]);
-      setNotes("");
-      setTerms("");
-      setLogo(null);
-      setEditingDraftId(null);
-    }, 2000);
+    setCreatedDocumentId(emittedInvoiceData.id.toString());
+    setShowShareDialog(true);
+  };
+  const resetForm = () => {
+    setInvoiceNumber("INV-008");
+    setClientName("");
+    setClientContact("");
+    setClientEmail("");
+    setClientAddress("");
+    setClientPhone("");
+    setSelectedClientId("");
+    setItems([
+      { id: "1", description: "", quantity: 1, unitPrice: 0, tax: 0 },
+    ]);
+    setNotes("");
+    setTerms("");
+    setLogo(null);
+    setEditingDraftId(null);
   };
 
   const addFromCatalog = (item: any) => {
@@ -1985,6 +1987,15 @@ export default function NewInvoicePage() {
         </DialogContent>
       </Dialog>
 
+      <ShareLinkDialog
+        open={showShareDialog}
+        onOpenChange={setShowShareDialog}
+        documentId={createdDocumentId}
+        documentType="invoice"
+        clientName={clientName}
+        onClose={resetForm}
+      />
+
       <Dialog open={showDraftDialog} onOpenChange={setShowDraftDialog}>
         <DialogContent className="sm:max-w-md">
           <div className="flex flex-col items-center justify-center py-8 space-y-4">
@@ -2057,22 +2068,22 @@ export default function NewInvoicePage() {
       </Dialog>
 
       {/* Mobile Wizard Controls */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background border-t border-border z-40 lg:hidden flex justify-between gap-3 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] pb-safe-offset-4">
+      <div className="fixed bottom-20 left-0 right-0 p-3 sm:p-4 bg-background border-t border-border z-40 lg:hidden flex justify-between gap-2 sm:gap-3 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] pb-safe-offset-4">
         <Button 
           variant="outline" 
           onClick={() => setMobileStep(s => Math.max(1, s - 1))}
           disabled={mobileStep === 1}
-          className="flex-1 rounded-xl h-12"
+          className="flex-1 rounded-xl h-12 text-sm"
         >
           Back
         </Button>
         {mobileStep < 3 ? (
-          <Button onClick={() => setMobileStep(s => s + 1)} className="flex-1 rounded-xl h-12 shadow-lg shadow-primary/20">
-            Next Step <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
+          <Button onClick={() => setMobileStep(s => s + 1)} className="flex-1 rounded-xl h-12 shadow-lg shadow-primary/20 text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+            Next <ArrowLeft className="ml-1 sm:ml-2 h-4 w-4 rotate-180 shrink-0 inline-block" />
           </Button>
         ) : (
-          <Button onClick={handleSaveDraft} className="flex-1 rounded-xl h-12 bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20">
-            <Save className="mr-2 h-4 w-4" /> Save Draft
+          <Button onClick={handleSaveDraft} className="flex-1 rounded-xl h-12 bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20 text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+            <Save className="mr-1 sm:mr-2 h-4 w-4 shrink-0 inline-block" /> Save
           </Button>
         )}
       </div>

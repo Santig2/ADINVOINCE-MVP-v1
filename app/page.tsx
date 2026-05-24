@@ -322,42 +322,6 @@ function DashboardContent() {
             </motion.div>
           </motion.div>
 
-          {/* Quick Actions */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-8 max-w-2xl mx-auto flex gap-3 overflow-x-auto pb-4 scrollbar-hide justify-start sm:justify-center"
-          >
-            <Link href="/invoices/new" className="flex flex-col items-center gap-2.5 group shrink-0">
-              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-accent-warm/20 to-accent-warm/5 border border-accent-warm/20 text-accent-warm flex items-center justify-center group-hover:bg-accent-warm group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(255,100,50,0.3)] group-hover:shadow-[0_12px_24px_-6px_rgba(255,100,50,0.6)] group-hover:-translate-y-1 group-active:scale-95 relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <FileText className="h-6 w-6 sm:h-7 sm:w-7 relative z-10" />
-              </div>
-              <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Invoice</span>
-            </Link>
-            
-            <Link href="/quotes/new" className="flex flex-col items-center gap-2.5 group shrink-0">
-              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-500/5 border border-orange-500/20 text-orange-500 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(249,115,22,0.3)] group-hover:shadow-[0_12px_20px_-6px_rgba(249,115,22,0.5)] group-hover:-translate-y-1 group-active:scale-95">
-                <FileCheck className="h-6 w-6 sm:h-7 sm:w-7" />
-              </div>
-              <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Estimate</span>
-            </Link>
-
-            <Link href="/expenses" className="flex flex-col items-center gap-2.5 group shrink-0">
-              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-500/5 border border-green-500/20 text-green-500 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(34,197,94,0.3)] group-hover:shadow-[0_12px_20px_-6px_rgba(34,197,94,0.5)] group-hover:-translate-y-1 group-active:scale-95">
-                <DollarSign className="h-6 w-6 sm:h-7 sm:w-7" />
-              </div>
-              <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Expense</span>
-            </Link>
-
-            <Link href="/clients" className="flex flex-col items-center gap-2.5 group shrink-0">
-              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-500/5 border border-purple-500/20 text-purple-500 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_8px_16px_-6px_rgba(168,85,247,0.3)] group-hover:shadow-[0_12px_20px_-6px_rgba(168,85,247,0.5)] group-hover:-translate-y-1 group-active:scale-95">
-                <Users className="h-6 w-6 sm:h-7 sm:w-7" />
-              </div>
-              <span className="text-[11px] sm:text-xs font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">Client</span>
-            </Link>
-          </motion.div>
         </div>
 
         {/* Overlapping Bottom Content Area */}

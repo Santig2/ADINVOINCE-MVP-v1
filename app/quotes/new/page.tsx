@@ -44,6 +44,7 @@ import jsPDF from "jspdf";
 import { TemplateSelectionDialog } from "@/components/template-selection-dialog";
 import { QuotePDFTemplate, QuoteData, QuoteItem } from "@/components/quote-pdf-template";
 import { generateQuotePrintHTML } from "@/components/quote-print-template";
+import { ShareLinkDialog } from "@/components/share-link-dialog";
 
 type QuoteDraft = QuoteData & {
   createdAt: string;
@@ -82,6 +83,8 @@ function QuotesFormContent() {
   const [showDraftDialog, setShowDraftDialog] = useState(false);
   const [showTemplateDialog, setShowTemplateDialog] = useState(false);
   const [showSaveTemplateDialog, setShowSaveTemplateDialog] = useState(false);
+  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [createdDocumentId, setCreatedDocumentId] = useState("");
   const [templateName, setTemplateName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const quotePreviewRef = useRef<HTMLDivElement>(null);
@@ -457,17 +460,17 @@ function QuotesFormContent() {
     }
 
     setShowSendDialog(false);
-    setShowSuccessDialog(true);
+    setCreatedDocumentId(emittedQuoteData.id.toString());
+    setShowShareDialog(true);
+  };
 
-    setTimeout(() => {
-      setShowSuccessDialog(false);
-      setQuoteNumber("QUO-002");
-      setClientName(""); setClientContact(""); setClientEmail(""); setClientAddress(""); setClientPhone("");
-      setProjectName(""); setProposalSummary(""); setEstimatedStartDate(""); setEstimatedDeliveryDate(""); setPaymentMethods([]);
-      setSelectedClientId("");
-      setItems([{ id: "1", description: "", longDescription: "", quantity: 1, unitPrice: 0, tax: 0 }]);
-      setNotes(""); setTerms(""); setWarrantyNotes(""); setLogo(null); setEditingDraftId(null);
-    }, 2000);
+  const resetForm = () => {
+    setQuoteNumber("QUO-002");
+    setClientName(""); setClientContact(""); setClientEmail(""); setClientAddress(""); setClientPhone("");
+    setProjectName(""); setProposalSummary(""); setEstimatedStartDate(""); setEstimatedDeliveryDate(""); setPaymentMethods([]);
+    setSelectedClientId("");
+    setItems([{ id: "1", description: "", longDescription: "", quantity: 1, unitPrice: 0, tax: 0 }]);
+    setNotes(""); setTerms(""); setWarrantyNotes(""); setLogo(null); setEditingDraftId(null);
   };
 
   const togglePaymentMethod = (method: string) => {
@@ -695,6 +698,15 @@ function QuotesFormContent() {
             </div>
           </DialogContent>
         </Dialog>
+
+        <ShareLinkDialog
+          open={showShareDialog}
+          onOpenChange={setShowShareDialog}
+          documentId={createdDocumentId}
+          documentType="estimate"
+          clientName={clientName}
+          onClose={resetForm}
+        />
 
         <Dialog open={showDraftDialog} onOpenChange={setShowDraftDialog}>
           <DialogContent className="sm:max-w-md">

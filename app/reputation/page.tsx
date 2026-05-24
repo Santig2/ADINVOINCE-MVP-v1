@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { Star, ThumbsUp, ThumbsDown, MessageSquare, ArrowRight, Bot } from "lucide-react"
+import { Star, ThumbsUp, ThumbsDown, MessageSquare, ArrowRight, Bot, Link as LinkIcon, Share2 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
 import {
   Dialog,
@@ -17,6 +17,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ShareLinkDialog } from "@/components/share-link-dialog"
 
 export default function ReputationPage() {
   const { toast } = useToast()
@@ -26,6 +29,34 @@ export default function ReputationPage() {
   ])
   const [resolvingId, setResolvingId] = useState<number | null>(null)
   const [resolutionText, setResolutionText] = useState("")
+  
+  const [googleBusinessLink, setGoogleBusinessLink] = useState("")
+  const [showShareDialog, setShowShareDialog] = useState(false)
+  const [companyId, setCompanyId] = useState("default-company")
+
+  useEffect(() => {
+    // Load reviews and config
+    const savedLink = localStorage.getItem("googleBusinessLink") || ""
+    setGoogleBusinessLink(savedLink)
+    
+    const intercepted = JSON.parse(localStorage.getItem("interceptedReviews") || "[]")
+    if (intercepted.length > 0) {
+      setReviews(intercepted)
+    }
+
+    const savedCompanies = JSON.parse(localStorage.getItem("companies") || "[]")
+    if (savedCompanies.length > 0) {
+      setCompanyId(savedCompanies[0].id.toString())
+    }
+  }, [])
+
+  const handleSaveLink = () => {
+    localStorage.setItem("googleBusinessLink", googleBusinessLink)
+    toast({
+      title: "Link Saved",
+      description: "Google Business link updated successfully."
+    })
+  }
 
   const handleResolve = () => {
     if (!resolvingId) return
@@ -36,6 +67,11 @@ export default function ReputationPage() {
       title: "Issue Resolved",
       description: "The client has been notified and the ticket is closed."
     })
+    
+    // update localStorage
+    const intercepted = JSON.parse(localStorage.getItem("interceptedReviews") || "[]")
+    const updated = intercepted.filter((r: any) => r.id !== resolvingId)
+    localStorage.setItem("interceptedReviews", JSON.stringify(updated))
   }
 
   return (
@@ -66,16 +102,26 @@ export default function ReputationPage() {
                 <Bot className="w-48 h-48" />
               </div>
               <CardContent className="p-8 relative z-10">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center shrink-0">
-                    <Bot className="w-6 h-6 text-white" />
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center shrink-0">
+                      <Bot className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold mb-2">Automated Review Filtering</h2>
+                      <p className="text-white/80 max-w-md">
+                        Botsy automatically requests reviews from your clients. Positive experiences go to Google, while issues are sent privately to you to resolve.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-2xl font-bold mb-2">Automated Review Filtering</h2>
-                    <p className="text-white/80 max-w-md">
-                      Botsy automatically requests reviews from your clients. Positive experiences go to Google, while issues are sent privately to you to resolve.
-                    </p>
-                  </div>
+                  <Button 
+                    variant="secondary" 
+                    className="shrink-0 bg-white text-primary hover:bg-white/90 font-bold shadow-lg"
+                    onClick={() => setShowShareDialog(true)}
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Request Review
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -87,6 +133,31 @@ export default function ReputationPage() {
                 <CardDescription>Configure how Botsy handles your clients' feedback.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
+                
+                {/* Google Business Link */}
+                <div className="p-5 bg-blue-50/50 rounded-xl border border-blue-100 mb-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-2 bg-blue-500/10 rounded-lg text-blue-600 shrink-0">
+                      <LinkIcon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <Label className="font-bold text-slate-800 text-base">Google Business Link</Label>
+                      <p className="text-sm text-slate-500 mt-1">
+                        Where should happy clients (4-5 stars) be redirected to post their review?
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 pl-12">
+                    <Input 
+                      placeholder="https://g.page/r/..." 
+                      value={googleBusinessLink}
+                      onChange={(e) => setGoogleBusinessLink(e.target.value)}
+                      className="bg-white border-blue-100"
+                    />
+                    <Button onClick={handleSaveLink} className="shrink-0 bg-blue-600 hover:bg-blue-700">Save Link</Button>
+                  </div>
+                </div>
+
                 <div className="flex items-center justify-between p-4 bg-background rounded-xl border border-border/50">
                   <div className="flex items-center gap-4">
                     <div className="p-2 bg-blue-500/10 rounded-lg text-blue-500">
@@ -211,6 +282,14 @@ export default function ReputationPage() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <ShareLinkDialog
+        open={showShareDialog}
+        onOpenChange={setShowShareDialog}
+        documentId={companyId}
+        documentType="review"
+        customUrl={typeof window !== "undefined" ? `${window.location.origin}/p/review/${companyId}` : ""}
+      />
     </AppLayout>
   )
 }

@@ -114,36 +114,36 @@ export default function BusinessCardPage() {
                 <div className={`absolute bottom-[-20%] left-[-10%] w-1/2 h-1/2 ${cardData.accent} rounded-full blur-3xl`} />
                 
                 {/* Top Section */}
-                <div className="flex-1 p-8 relative z-10 flex flex-col justify-between">
+                <div className="flex-1 p-5 sm:p-8 relative z-10 flex flex-col justify-between">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-3xl font-black tracking-tight drop-shadow-md">{cardData.name}</h3>
-                      <p className="text-white/80 font-medium mt-1 uppercase tracking-wider text-xs">{cardData.profession}</p>
+                      <h3 className="text-2xl sm:text-3xl font-black tracking-tight drop-shadow-md">{cardData.name}</h3>
+                      <p className="text-white/80 font-medium mt-0.5 sm:mt-1 uppercase tracking-wider text-[10px] sm:text-xs">{cardData.profession}</p>
                     </div>
-                    <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center shadow-inner">
-                      <IdCard className="w-7 h-7 text-white" />
+                    <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl border border-white/20 flex items-center justify-center shadow-inner shrink-0 ml-2">
+                      <IdCard className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                     </div>
                   </div>
                 </div>
 
                 {/* Bottom Section (Glassmorphism Footer) */}
-                <div className="h-[45%] w-full bg-black/20 backdrop-blur-xl border-t border-white/10 p-6 px-8 flex justify-between items-end relative z-10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]">
-                  <div className="space-y-1.5 text-xs text-white/90">
-                    <p className="flex items-center gap-2"><span className="w-4 flex justify-center opacity-70">📱</span> {cardData.phone}</p>
-                    <p className="flex items-center gap-2"><span className="w-4 flex justify-center opacity-70">✉️</span> {cardData.email}</p>
-                    <p className="flex items-center gap-2"><span className="w-4 flex justify-center opacity-70">🌐</span> {cardData.website}</p>
+                <div className="h-auto min-h-[45%] w-full bg-black/20 backdrop-blur-xl border-t border-white/10 p-4 sm:p-6 sm:px-8 flex justify-between items-end relative z-10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] gap-2">
+                  <div className="space-y-1 sm:space-y-1.5 text-[10px] sm:text-xs text-white/90">
+                    <p className="flex items-center gap-1.5 sm:gap-2"><span className="w-3 sm:w-4 flex justify-center opacity-70">📱</span> {cardData.phone}</p>
+                    <p className="flex items-center gap-1.5 sm:gap-2"><span className="w-3 sm:w-4 flex justify-center opacity-70">✉️</span> {cardData.email}</p>
+                    <p className="flex items-center gap-1.5 sm:gap-2"><span className="w-3 sm:w-4 flex justify-center opacity-70">🌐</span> {cardData.website}</p>
                     {cardData.socialHandle && (
-                      <div className="flex items-center gap-2 mt-2 font-medium text-white">
-                        <span className="w-4 flex justify-center opacity-90">{renderSocialIcon(cardData.socialNetwork, "w-4 h-4")}</span>
+                      <div className="flex items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2 font-medium text-white">
+                        <span className="w-3 sm:w-4 flex justify-center opacity-90">{renderSocialIcon(cardData.socialNetwork, "w-3 h-3 sm:w-4 sm:h-4")}</span>
                         <span>{cardData.socialHandle}</span>
                       </div>
                     )}
                   </div>
                   
                   {/* QR Code Container styled like a chip/scan zone */}
-                  <div className="w-20 h-20 bg-white/90 p-1.5 rounded-xl shadow-lg transform rotate-[-2deg] group-hover:rotate-0 transition-transform duration-300">
-                    <div className="w-full h-full border-2 border-dashed border-slate-400 rounded-lg flex items-center justify-center bg-white">
-                      <QrCode className="w-12 h-12 text-slate-800" />
+                  <div className="w-14 h-14 sm:w-20 sm:h-20 bg-white/90 p-1 sm:p-1.5 rounded-lg sm:rounded-xl shadow-lg transform rotate-[-2deg] group-hover:rotate-0 transition-transform duration-300 shrink-0 mb-1">
+                    <div className="w-full h-full border sm:border-2 border-dashed border-slate-400 rounded sm:rounded-lg flex items-center justify-center bg-white">
+                      <QrCode className="w-8 h-8 sm:w-12 sm:h-12 text-slate-800" />
                     </div>
                   </div>
                 </div>

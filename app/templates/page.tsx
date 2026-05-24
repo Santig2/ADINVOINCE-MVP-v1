@@ -136,29 +136,29 @@ export default function TemplatesPage() {
           </DialogHeader>
           {previewTemplate && (
             <div className="flex flex-col gap-6">
-              <div className={`aspect-[1/1.4] ${previewTemplate.theme} rounded-xl border border-border shadow-2xl p-8 flex flex-col relative overflow-hidden`}>
+              <div className={`w-full min-h-[500px] max-h-[60vh] sm:max-h-none overflow-y-auto sm:aspect-[1/1.4] ${previewTemplate.theme} rounded-xl border border-border shadow-2xl p-4 sm:p-8 flex flex-col relative`}>
                  {/* Top Colored Bar */}
                  <div className={`absolute top-0 left-0 w-full h-3 ${previewTemplate.bg} opacity-80`} />
                  
                  {/* Header */}
                  <div className="flex justify-between items-start mb-8 mt-2">
-                    <div className="flex gap-3 items-center">
-                      <div className={`w-12 h-12 rounded-xl ${previewTemplate.bg} ${previewTemplate.color} flex items-center justify-center backdrop-blur-md border border-white/10`}>
+                    <div className="flex gap-2 sm:gap-3 items-center">
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${previewTemplate.bg} ${previewTemplate.color} flex items-center justify-center backdrop-blur-md border border-white/10`}>
                         <previewTemplate.icon className="w-6 h-6" />
                       </div>
                       <div>
-                        <h3 className={`font-bold text-lg leading-tight ${previewTemplate.textPrimary}`}>{previewTemplate.name}</h3>
-                        <p className={`text-xs ${previewTemplate.textSecondary}`}>Professional Services</p>
+                        <h3 className={`font-bold text-base sm:text-lg leading-tight ${previewTemplate.textPrimary}`}>{previewTemplate.name}</h3>
+                        <p className={`text-[10px] sm:text-xs ${previewTemplate.textSecondary}`}>Professional Services</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <h2 className={`text-3xl font-black uppercase tracking-widest opacity-20`}>INVOICE</h2>
-                      <p className={`text-sm font-semibold mt-1 ${previewTemplate.textSecondary}`}>#INV-2024-001</p>
+                      <h2 className={`text-2xl sm:text-3xl font-black uppercase tracking-widest opacity-20`}>INVOICE</h2>
+                      <p className={`text-xs sm:text-sm font-semibold mt-1 ${previewTemplate.textSecondary}`}>#INV-2024-001</p>
                     </div>
                  </div>
                  
                  {/* Billing Info */}
-                 <div className="flex justify-between mb-8 text-sm">
+                 <div className="flex justify-between gap-4 mb-8 text-xs sm:text-sm">
                    <div>
                      <p className={`text-xs font-bold uppercase mb-1 ${previewTemplate.textMuted}`}>Bill To:</p>
                      <p className={`font-semibold ${previewTemplate.textPrimary}`}>Acme Corporation</p>
@@ -174,8 +174,8 @@ export default function TemplatesPage() {
                  </div>
 
                  {/* Table */}
-                 <div className="flex-1">
-                   <table className="w-full text-sm">
+                 <div className="flex-1 overflow-x-auto pb-4">
+                   <table className="w-full text-xs sm:text-sm min-w-[350px]">
                      <thead>
                        <tr className={`border-b-2 ${previewTemplate.table} ${previewTemplate.textMuted}`}>
                          <th className="text-left pb-2 font-semibold">Description</th>

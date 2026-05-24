@@ -34,6 +34,7 @@ import {
   User,
   Phone,
 } from "lucide-react";
+import { ShareLinkDialog } from "@/components/share-link-dialog";
 
 type Company = {
   id: string | number;
@@ -99,6 +100,9 @@ export default function NewAdvancePage() {
   // Voice Mock states
   const [isRecording, setIsRecording] = useState(false);
   const [voiceText, setVoiceText] = useState("");
+
+  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [createdDocumentId, setCreatedDocumentId] = useState("");
 
   const { toast } = useToast();
   const router = useRouter();
@@ -253,14 +257,50 @@ export default function NewAdvancePage() {
       createdAt: new Date().toISOString()
     };
 
-    const existing = JSON.parse(localStorage.getItem("advancesReports") || "[]");
-    localStorage.setItem("advancesReports", JSON.stringify([...existing, newReport]));
+    const existing = JSON.parse(localStorage.getItem("advances") || "[]");
+    localStorage.setItem("advances", JSON.stringify([...existing, newReport]));
     
     toast({
       title: "Draft Saved",
       description: "Advance report saved to your dashboard.",
     });
     router.push("/advances");
+  };
+
+  const handleSendReport = () => {
+    if (!projectName.trim()) {
+      toast({ title: "Missing Project Name", description: "Cannot send without a project name", variant: "destructive" });
+      return;
+    }
+    if (!clientPhone.trim() && !clientName.trim()) {
+      toast({ title: "Missing Client Info", description: "You must provide client info to send the report", variant: "destructive" });
+      return;
+    }
+
+    const reportId = Date.now().toString();
+    const selectedCompany = companies.find(c => c.id.toString() === companyId);
+    
+    const newReport = {
+      id: reportId,
+      companyId,
+      companyName: selectedCompany?.name,
+      projectName,
+      date,
+      location: locationStr,
+      clientName,
+      clientPhone,
+      notes,
+      images,
+      generatedReport: JSON.stringify(generatedReport),
+      createdAt: new Date().toISOString(),
+      status: "sent"
+    };
+
+    const existing = JSON.parse(localStorage.getItem("advances") || "[]");
+    localStorage.setItem("advances", JSON.stringify([...existing, newReport]));
+    
+    setCreatedDocumentId(reportId);
+    setShowShareDialog(true);
   };
 
   const handleExportPDF = async () => {
@@ -325,7 +365,7 @@ export default function NewAdvancePage() {
               <Save className="h-4 w-4 mr-2" />
               Save
             </Button>
-            <Button variant="outline" className="flex-1 md:flex-none" onClick={() => toast({ title: "Sent successfully", description: "Mock email has been sent."})}>
+            <Button variant="outline" className="flex-1 md:flex-none" onClick={handleSendReport}>
               <Send className="h-4 w-4 mr-2" />
               Send
             </Button>
@@ -578,6 +618,15 @@ export default function NewAdvancePage() {
              </div>
           </div>
         </div>
+        
+        <ShareLinkDialog
+          open={showShareDialog}
+          onOpenChange={setShowShareDialog}
+          documentId={createdDocumentId}
+          documentType="advance"
+          clientName={clientName}
+          onClose={() => router.push("/advances")}
+        />
       </div>
     </AppLayout>
   );
