@@ -15,7 +15,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen bg-slate-50 dark:bg-slate-950`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider defaultTheme="light" storageKey="AddInvoices-theme">
           <main className="min-h-screen w-full">
             {children}
           </main>

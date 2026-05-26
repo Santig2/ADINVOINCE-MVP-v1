@@ -40,6 +40,13 @@ const TUTORIALS = [
         duration: "3:10",
         thumbnail: "/images/tutorials/payments.jpg",
     },
+    {
+        id: 4,
+        title: "Automate your reputation and reviews",
+        duration: "5:22",
+        thumbnail: "https://img.youtube.com/vi/W9FmqvIXVlg/maxresdefault.jpg",
+        link: "https://youtu.be/W9FmqvIXVlg?si=WxNtaemrwT7qnhTK",
+    },
 ];
 
 // Simple Chatbot Logic
@@ -163,10 +170,24 @@ export default function AskMeHowPage() {
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {TUTORIALS.map(tutorial => (
-                                    <Card key={tutorial.id} className="overflow-hidden hover:shadow-md transition-all group cursor-pointer border-border/60">
-                                        <div className="aspect-video bg-secondary/50 relative flex items-center justify-center group-hover:bg-secondary/70 transition-colors">
-                                            <PlayCircle className="h-12 w-12 text-primary opacity-80 group-hover:scale-110 transition-transform" />
-                                            <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                                    <Card 
+                                      key={tutorial.id} 
+                                      className="overflow-hidden hover:shadow-md transition-all group cursor-pointer border-border/60"
+                                      onClick={() => tutorial.link && window.open(tutorial.link, '_blank')}
+                                    >
+                                        <div className="aspect-video bg-secondary/50 relative flex items-center justify-center group-hover:bg-secondary/70 transition-colors overflow-hidden">
+                                            {tutorial.thumbnail && (
+                                                <img 
+                                                    src={tutorial.thumbnail} 
+                                                    alt={tutorial.title} 
+                                                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity"
+                                                    onError={(e) => { e.currentTarget.style.display = 'none' }}
+                                                />
+                                            )}
+                                            <div className="relative z-10 w-16 h-16 rounded-full bg-background/60 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                                <PlayCircle className="w-10 h-10 text-primary ml-1" />
+                                            </div>
+                                            <div className="absolute bottom-2 right-2 z-10 bg-black/70 text-white text-xs px-2 py-1 rounded">
                                                 {tutorial.duration}
                                             </div>
                                         </div>

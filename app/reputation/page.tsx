@@ -5,50 +5,64 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
-import { Textarea } from "@/components/ui/textarea"
-import { Star, ThumbsUp, ThumbsDown, MessageSquare, ArrowRight, Bot, Link as LinkIcon, Share2 } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { Star, ThumbsUp, ThumbsDown, MessageSquare, Link as LinkIcon, Share2, PlayCircle, Instagram, Youtube, Video, RefreshCw } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ShareLinkDialog } from "@/components/share-link-dialog"
+import { useTheme } from "@/components/theme-provider"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 export default function ReputationPage() {
   const { toast } = useToast()
-  const [reviews, setReviews] = useState([
-    { id: 1, name: "Maria S.", date: "Yesterday", text: "The plumber arrived 2 hours late. Work was good but communication was poor." },
-    { id: 2, name: "John D.", date: "2 days ago", text: "They left a mess in the kitchen after fixing the sink. Very unprofessional." }
-  ])
-  const [resolvingId, setResolvingId] = useState<number | null>(null)
-  const [resolutionText, setResolutionText] = useState("")
-  
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
   const [googleBusinessLink, setGoogleBusinessLink] = useState("")
   const [showShareDialog, setShowShareDialog] = useState(false)
   const [companyId, setCompanyId] = useState("default-company")
+  const [hasRequestedReview, setHasRequestedReview] = useState(false)
+  const [showLeadDialog, setShowLeadDialog] = useState(false)
+  const [leadData, setLeadData] = useState({ name: "", email: "", phone: "" })
 
   useEffect(() => {
+    setMounted(true)
+    const requested = localStorage.getItem("botsy_review_requested") === "true"
+    setHasRequestedReview(requested)
+
     // Load reviews and config
     const savedLink = localStorage.getItem("googleBusinessLink") || ""
     setGoogleBusinessLink(savedLink)
-    
-    const intercepted = JSON.parse(localStorage.getItem("interceptedReviews") || "[]")
-    if (intercepted.length > 0) {
-      setReviews(intercepted)
-    }
 
     const savedCompanies = JSON.parse(localStorage.getItem("companies") || "[]")
     if (savedCompanies.length > 0) {
       setCompanyId(savedCompanies[0].id.toString())
     }
   }, [])
+
+  const handleRequestReviewClick = () => {
+    if (hasRequestedReview) {
+      document.getElementById("conversion-section")?.scrollIntoView({ behavior: "smooth" })
+    } else {
+      setShowShareDialog(true)
+      setHasRequestedReview(true)
+      localStorage.setItem("botsy_review_requested", "true")
+    }
+  }
+
+  const handleResetRequest = () => {
+    setHasRequestedReview(false)
+    localStorage.removeItem("botsy_review_requested")
+    toast({ title: "Test Mode", description: "The review request limit has been reset." })
+  }
+
+  const handleLeadSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    toast({ title: "Thank you!", description: "A Botsy expert will contact you soon to activate your automation." })
+    setShowLeadDialog(false)
+    setLeadData({ name: "", email: "", phone: "" })
+  }
 
   const handleSaveLink = () => {
     localStorage.setItem("googleBusinessLink", googleBusinessLink)
@@ -58,38 +72,47 @@ export default function ReputationPage() {
     })
   }
 
-  const handleResolve = () => {
-    if (!resolvingId) return
-    setReviews(prev => prev.filter(r => r.id !== resolvingId))
-    setResolvingId(null)
-    setResolutionText("")
-    toast({
-      title: "Issue Resolved",
-      description: "The client has been notified and the ticket is closed."
-    })
-    
-    // update localStorage
-    const intercepted = JSON.parse(localStorage.getItem("interceptedReviews") || "[]")
-    const updated = intercepted.filter((r: any) => r.id !== resolvingId)
-    localStorage.setItem("interceptedReviews", JSON.stringify(updated))
-  }
+
+
+  const bgImage = mounted && theme === "dark"
+    ? "/images/FINDOS%20DARK%20CON%20PULPUS.png"
+    : "/images/FINDOS%20LUZ%20CON%20PULPOS%20(1).png"
 
   return (
-    <AppLayout>
+    <AppLayout 
+      mainClassName="bg-transparent"
+      mainStyle={{ backgroundImage: `url('${bgImage}')` }}
+    >
       <div className="p-4 sm:p-6 md:p-10 max-w-6xl mx-auto space-y-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-primary/10 rounded-xl text-primary">
-              <Star className="w-8 h-8" />
-            </div>
-            <div>
-              <h1 className="text-3xl md:text-4xl font-black text-foreground">Reputation Manager</h1>
-              <p className="text-muted-foreground mt-1">Review Filtering System by Botsy.</p>
+        <div className="flex flex-col items-center text-center gap-0 mb-8">
+          <div className="w-32 h-24 flex items-center justify-center shrink-0">
+            <img 
+              src="/images/Botsy%20LOGO.pdf%20(1).png" 
+              alt="Botsy Logo Light" 
+              className="w-full h-full object-contain dark:hidden"
+            />
+            <img 
+              src="/images/Botsy%20LOGO%20LETRAS%20BLANCAS%20.pdf.png" 
+              alt="Botsy Logo Dark" 
+              className="w-full h-full object-contain hidden dark:block"
+            />
+          </div>
+          <div className="flex flex-col items-center gap-2 -mt-2 relative">
+            <button 
+              onClick={handleResetRequest} 
+              className="absolute -right-10 top-1 p-2 text-muted-foreground hover:text-[#D97706] transition-colors"
+              title="Reset limit (Dev Mode)"
+            >
+              <RefreshCw className="w-4 h-4" />
+            </button>
+            <h1 className="text-3xl md:text-4xl font-black text-foreground">Reputation Manager</h1>
+            <p className="text-muted-foreground">Review Filtering System by Botsy.</p>
+            <div className="mt-1">
+              <Badge className="bg-[#E5D9E7] dark:bg-[#341F39] text-[#491C54] dark:text-[#E8D1ED] hover:bg-[#DAC8DC] dark:hover:bg-[#432949] py-1.5 px-4 rounded-full font-bold border-none transition-colors duration-200">
+                Exclusive Feature
+              </Badge>
             </div>
           </div>
-          <Badge className="bg-primary/20 text-primary hover:bg-primary/30 py-1.5 px-4 rounded-full font-bold">
-            EN DESARROLLO
-          </Badge>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -97,27 +120,37 @@ export default function ReputationPage() {
           <div className="lg:col-span-2 space-y-6">
             
             {/* AI Banner */}
-            <Card className="bg-gradient-to-r from-primary-dark via-primary to-primary-light text-white border-0 overflow-hidden relative">
-              <div className="absolute right-0 bottom-0 opacity-20 -mr-10 -mb-10">
-                <Bot className="w-48 h-48" />
+            <Card className="bg-gradient-to-r from-[#8B5115] to-[#F7941D] text-white border-0 overflow-hidden relative">
+              <div className="absolute right-0 bottom-0 opacity-40 -mr-8 -mb-12 pointer-events-none">
+                <img 
+                  src="/images/icono%20GRIS%20%20botsy.png" 
+                  alt="" 
+                  className="w-64 h-64 object-contain" 
+                />
               </div>
               <CardContent className="p-8 relative z-10">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center shrink-0">
-                      <Bot className="w-6 h-6 text-white" />
-                    </div>
+                    <img 
+                      src="/images/icono%20GRIS%20%20botsy.png" 
+                      alt="Botsy Icon" 
+                      className="w-12 h-12 object-contain shrink-0 mt-1" 
+                    />
                     <div>
                       <h2 className="text-2xl font-bold mb-2">Automated Review Filtering</h2>
-                      <p className="text-white/80 max-w-md">
+                      <p className="text-white/90 max-w-md">
                         Botsy automatically requests reviews from your clients. Positive experiences go to Google, while issues are sent privately to you to resolve.
                       </p>
                     </div>
                   </div>
                   <Button 
                     variant="secondary" 
-                    className="shrink-0 bg-white text-primary hover:bg-white/90 font-bold shadow-lg"
-                    onClick={() => setShowShareDialog(true)}
+                    className={`shrink-0 font-bold shadow-lg transition-colors ${
+                      hasRequestedReview 
+                        ? 'bg-slate-200 text-slate-400 hover:bg-slate-200 cursor-not-allowed dark:bg-slate-800 dark:text-slate-500' 
+                        : 'bg-white text-[#D97706] hover:bg-white/90'
+                    }`}
+                    onClick={handleRequestReviewClick}
                   >
                     <Share2 className="w-4 h-4 mr-2" />
                     Request Review
@@ -127,7 +160,7 @@ export default function ReputationPage() {
             </Card>
 
             {/* Dashboard / Toggles */}
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+            <Card className="bg-[#F2E5F9]/70 dark:bg-[#1D0C24]/65 backdrop-blur-sm border-[#D8BEEC] dark:border-[#562966]/70">
               <CardHeader>
                 <CardTitle>Automation Settings</CardTitle>
                 <CardDescription>Configure how Botsy handles your clients' feedback.</CardDescription>
@@ -135,14 +168,14 @@ export default function ReputationPage() {
               <CardContent className="space-y-6">
                 
                 {/* Google Business Link */}
-                <div className="p-5 bg-blue-50/50 rounded-xl border border-blue-100 mb-6">
+                <div className="p-5 bg-[#EEDBF5]/75 dark:bg-[#2A1033]/60 rounded-xl border border-[#DCBEEC]/90 dark:border-[#5A2C6C]/60 mb-6">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="p-2 bg-blue-500/10 rounded-lg text-blue-600 shrink-0">
+                    <div className="p-2 bg-[#491C54]/10 dark:bg-[#E8D1ED]/10 rounded-lg text-[#491C54] dark:text-[#E8D1ED] shrink-0">
                       <LinkIcon className="w-5 h-5" />
                     </div>
                     <div>
-                      <Label className="font-bold text-slate-800 text-base">Google Business Link</Label>
-                      <p className="text-sm text-slate-500 mt-1">
+                      <Label className="font-bold text-slate-800 dark:text-slate-200 text-base">Google Business Link</Label>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                         Where should happy clients (4-5 stars) be redirected to post their review?
                       </p>
                     </div>
@@ -152,15 +185,21 @@ export default function ReputationPage() {
                       placeholder="https://g.page/r/..." 
                       value={googleBusinessLink}
                       onChange={(e) => setGoogleBusinessLink(e.target.value)}
-                      className="bg-white border-blue-100"
+                      className="bg-white/80 dark:bg-slate-950/80 border-[#DABCEB] dark:border-[#5A2C6C] focus-visible:ring-[#491C54] dark:focus-visible:ring-[#E8D1ED]"
                     />
-                    <Button onClick={handleSaveLink} className="shrink-0 bg-blue-600 hover:bg-blue-700">Save Link</Button>
+                    <Button 
+                      variant="outline"
+                      onClick={handleSaveLink} 
+                      className="shrink-0 border-none bg-[#491C54] hover:bg-[#5C236A] text-white dark:bg-[#E8D1ED] dark:hover:bg-[#FAF0FC] dark:text-[#491C54] font-semibold transition-colors"
+                    >
+                      Save Link
+                    </Button>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between p-4 bg-background rounded-xl border border-border/50">
+                <div className="flex items-center justify-between p-4 bg-[#FAF3FD]/90 dark:bg-[#271431]/90 rounded-xl border border-[#DDBEEA] dark:border-[#522561]">
                   <div className="flex items-center gap-4">
-                    <div className="p-2 bg-blue-500/10 rounded-lg text-blue-500">
+                    <div className="p-2 bg-[#491C54]/10 dark:bg-[#E8D1ED]/10 rounded-lg text-[#491C54] dark:text-[#E8D1ED]">
                       <MessageSquare className="w-5 h-5" />
                     </div>
                     <div>
@@ -168,12 +207,12 @@ export default function ReputationPage() {
                       <p className="text-sm text-muted-foreground">Send SMS/Email 24h after job completion.</p>
                     </div>
                   </div>
-                  <Switch defaultChecked />
+                  <Switch defaultChecked className="data-[state=checked]:bg-[#491C54] dark:data-[state=checked]:bg-[#E8D1ED] dark:data-[state=checked]:[&>span]:bg-[#491C54]" />
                 </div>
 
-                <div className="flex items-center justify-between p-4 bg-background rounded-xl border border-border/50">
+                <div className="flex items-center justify-between p-4 bg-[#FAF3FD]/90 dark:bg-[#271431]/90 rounded-xl border border-[#DDBEEA] dark:border-[#522561]">
                   <div className="flex items-center gap-4">
-                    <div className="p-2 bg-green-500/10 rounded-lg text-green-500">
+                    <div className="p-2 bg-emerald-500/10 dark:bg-emerald-500/20 rounded-lg text-emerald-600 dark:text-emerald-400">
                       <ThumbsUp className="w-5 h-5" />
                     </div>
                     <div>
@@ -181,12 +220,12 @@ export default function ReputationPage() {
                       <p className="text-sm text-muted-foreground">4 and 5 star ratings are prompted to post on Google.</p>
                     </div>
                   </div>
-                  <Switch defaultChecked />
+                  <Switch defaultChecked className="data-[state=checked]:bg-[#491C54] dark:data-[state=checked]:bg-[#E8D1ED] dark:data-[state=checked]:[&>span]:bg-[#491C54]" />
                 </div>
 
-                <div className="flex items-center justify-between p-4 bg-background rounded-xl border border-border/50">
+                <div className="flex items-center justify-between p-4 bg-[#FAF3FD]/90 dark:bg-[#271431]/90 rounded-xl border border-[#DDBEEA] dark:border-[#522561]">
                   <div className="flex items-center gap-4">
-                    <div className="p-2 bg-red-500/10 rounded-lg text-red-500">
+                    <div className="p-2 bg-rose-500/10 dark:bg-rose-500/20 rounded-lg text-rose-600 dark:text-rose-400">
                       <ThumbsDown className="w-5 h-5" />
                     </div>
                     <div>
@@ -194,7 +233,7 @@ export default function ReputationPage() {
                       <p className="text-sm text-muted-foreground">1 to 3 star ratings open a private support ticket.</p>
                     </div>
                   </div>
-                  <Switch defaultChecked />
+                  <Switch defaultChecked className="data-[state=checked]:bg-[#491C54] dark:data-[state=checked]:bg-[#E8D1ED] dark:data-[state=checked]:[&>span]:bg-[#491C54]" />
                 </div>
               </CardContent>
             </Card>
@@ -202,7 +241,7 @@ export default function ReputationPage() {
 
           {/* Stats & Intercepted Reviews */}
           <div className="space-y-6">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+            <Card className="bg-[#F2E5F9]/70 dark:bg-[#1D0C24]/65 backdrop-blur-sm border-[#D8BEEC] dark:border-[#562966]/70">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">Reputation Score</CardTitle>
               </CardHeader>
@@ -231,55 +270,141 @@ export default function ReputationPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 border-t-4 border-t-red-500">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg flex items-center justify-between">
-                  Intercepted
-                  {reviews.length > 0 && <Badge variant="destructive" className="rounded-full">{reviews.length} Action Required</Badge>}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <AnimatePresence>
-                  {reviews.map(review => (
-                    <motion.div key={review.id} initial={{opacity:0, height:0}} animate={{opacity:1, height:'auto'}} exit={{opacity:0, height:0}} className="overflow-hidden">
-                      <div className="p-3 bg-red-500/5 rounded-xl border border-red-500/20 mb-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <p className="font-bold text-sm">{review.name}</p>
-                          <span className="text-xs text-muted-foreground">{review.date}</span>
-                        </div>
-                        <p className="text-xs text-foreground/80 mb-3">"{review.text}"</p>
-                        <Button size="sm" variant="outline" className="w-full text-xs h-8" onClick={() => setResolvingId(review.id)}>Resolve Issue</Button>
-                      </div>
-                    </motion.div>
-                  ))}
-                  {reviews.length === 0 && (
-                    <div className="text-center p-4 text-muted-foreground text-sm">No pending issues!</div>
-                  )}
-                </AnimatePresence>
-              </CardContent>
-            </Card>
           </div>
+        </div>
+
+        {/* Conversion Section */}
+        <div id="conversion-section" className="pt-4 pb-8">
+          <Card className="bg-gradient-to-br from-[#491C54] to-[#1D0C24] text-white border-[#DABCEB]/30 overflow-hidden relative">
+            {/* Background embellishments */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8D1ED]/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#D97706]/20 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
+            
+            <CardContent className="p-8 md:p-12 relative z-10 flex flex-col md:flex-row gap-10 items-center justify-between">
+              <div className="flex-1 space-y-6">
+                <div className="space-y-2">
+                  <Badge className="bg-[#D97706] text-white hover:bg-[#D97706]/90 border-none px-3 py-1 text-xs mb-2">
+                    Go to the next level with Botsy
+                  </Badge>
+                  <h2 className="text-3xl md:text-4xl font-black leading-tight">
+                    Do you want to get more than 10 reviews a day?
+                  </h2>
+                  <p className="text-xl text-[#E8D1ED]/90 font-medium">
+                    I want full review automation.
+                  </p>
+                </div>
+                
+                <p className="text-white/70 max-w-md">
+                  Unlock the true potential of your online reputation. Automate follow-ups with every client, filter feedback, and boost your Google ranking automatically without manual effort.
+                </p>
+
+                <div className="pt-4 flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-none bg-[#D97706] hover:bg-[#B46204] text-white font-bold px-8 shadow-lg shadow-[#D97706]/20"
+                    onClick={() => setShowLeadDialog(true)}
+                  >
+                    Contact BOTSY
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-[#DABCEB]/40 text-[#E8D1ED] hover:bg-[#E8D1ED]/10 bg-transparent font-bold"
+                    onClick={() => window.location.href = '/ask-me-how'}
+                  >
+                    How does it work?
+                  </Button>
+                </div>
+                
+              </div>
+
+              <div className="w-full md:w-[400px] shrink-0 flex flex-col gap-6">
+                <div className="relative group cursor-pointer" onClick={() => window.open('https://youtu.be/W9FmqvIXVlg?si=WxNtaemrwT7qnhTK', '_blank')}>
+                  <div className="aspect-video bg-black/40 rounded-2xl border border-white/10 overflow-hidden relative shadow-2xl">
+                    <img 
+                      src="https://img.youtube.com/vi/W9FmqvIXVlg/maxresdefault.jpg" 
+                      alt="Video Thumbnail" 
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-[#D97706]/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <PlayCircle className="w-8 h-8 text-white ml-1" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-sm text-white/70 font-semibold uppercase tracking-wider">Follow Botsy</span>
+                  <div className="flex items-center gap-4">
+                    <a href="https://www.instagram.com/botsy.ai" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors">
+                      <Instagram className="w-5 h-5" />
+                    </a>
+                    <a href="https://www.tiktok.com/@botsy.ai" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors">
+                      <Video className="w-5 h-5" />
+                    </a>
+                    <a href="https://www.youtube.com/@Botsy_ai" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors">
+                      <Youtube className="w-5 h-5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
-      <Dialog open={!!resolvingId} onOpenChange={(open) => !open && setResolvingId(null)}>
-        <DialogContent>
+      <Dialog open={showLeadDialog} onOpenChange={setShowLeadDialog}>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Resolve Client Issue</DialogTitle>
-            <DialogDescription>Send a direct message to the client to resolve their bad experience privately.</DialogDescription>
+            <DialogTitle>Full Automation</DialogTitle>
+            <DialogDescription>
+              Leave your details and a Botsy expert will contact you to activate your review automation.
+            </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4 mt-2">
-            <Textarea 
-              placeholder="Hi, I'm so sorry about your experience..." 
-              value={resolutionText}
-              onChange={e => setResolutionText(e.target.value)}
-              rows={4}
-            />
-            <div className="flex justify-between items-center">
-              <Button variant="ghost" className="text-muted-foreground">Offer Discount</Button>
-              <Button onClick={handleResolve} disabled={!resolutionText.trim()}>Send & Resolve</Button>
+          <form onSubmit={handleLeadSubmit} className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input 
+                id="name" 
+                required 
+                value={leadData.name}
+                onChange={(e) => setLeadData({...leadData, name: e.target.value})}
+                placeholder="Your full name" 
+              />
             </div>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email Address</Label>
+              <Input 
+                id="email" 
+                type="email" 
+                required 
+                value={leadData.email}
+                onChange={(e) => setLeadData({...leadData, email: e.target.value})}
+                placeholder="you@email.com" 
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone</Label>
+              <Input 
+                id="phone" 
+                type="tel" 
+                required 
+                value={leadData.phone}
+                onChange={(e) => setLeadData({...leadData, phone: e.target.value})}
+                placeholder="+1 234 567 8900" 
+              />
+            </div>
+            <DialogFooter className="pt-4">
+              <Button type="button" variant="outline" onClick={() => setShowLeadDialog(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" variant="outline" className="border-none bg-[#491C54] hover:bg-[#5C236A] text-white">
+                Submit Request
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
 
