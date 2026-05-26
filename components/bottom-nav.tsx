@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import {
   Home,
@@ -66,9 +66,22 @@ const moreNavItems = [
 
 export function BottomNav() {
   const pathname = usePathname()
+  const router = useRouter()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false)
   const { triggerHaptic } = useHaptic()
+
+  const handleNavigateAndClose = (href: string, drawerType: 'create' | 'more') => {
+    triggerHaptic("light")
+    if (drawerType === 'create') setIsDrawerOpen(false)
+    if (drawerType === 'more') setIsMoreMenuOpen(false)
+    
+    // Slight delay ensures the drawer closing animation starts smoothly
+    // and doesn't interrupt the Next.js router transition on mobile
+    setTimeout(() => {
+      router.push(href)
+    }, 100)
+  }
 
   // Determine if a path is active. Handle the root path and its modes specially.
   const isActive = (href: string, matchMode?: string) => {
@@ -114,48 +127,50 @@ export function BottomNav() {
               <DrawerTitle className="text-xl font-bold">Create new</DrawerTitle>
             </DrawerHeader>
             <div className="flex flex-col gap-2 mt-2">
-              <Link href="/quotes/new" onClick={() => { triggerHaptic("light"); setIsDrawerOpen(false) }}>
+              <div onClick={() => handleNavigateAndClose("/quotes/new", 'create')} className="cursor-pointer">
                 <div className="flex items-center gap-4 rounded-xl p-4 hover:bg-secondary/50 transition-colors">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-100 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400">
                     <FileCheck className="h-5 w-5" />
                   </div>
                   <span className="font-medium text-base">Estimate</span>
                 </div>
-              </Link>
+              </div>
 
-              <Link href="/invoices/new" onClick={() => { triggerHaptic("light"); setIsDrawerOpen(false) }}>
+              <div onClick={() => handleNavigateAndClose("/invoices/new", 'create')} className="cursor-pointer">
                 <div className="flex items-center gap-4 rounded-xl p-4 hover:bg-secondary/50 transition-colors">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400">
                     <FileText className="h-5 w-5" />
                   </div>
                   <span className="font-medium text-base flex-1">Invoice</span>
-                  <Link
-                    href="/voice-assistant"
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary"
-                    onClick={(e) => { e.stopPropagation(); triggerHaptic("light") }}
+                  <div
+                    onClick={(e) => { 
+                      e.stopPropagation(); 
+                      handleNavigateAndClose("/voice-assistant", 'create') 
+                    }}
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                   >
                     <Mic className="h-4 w-4" />
-                  </Link>
+                  </div>
                 </div>
-              </Link>
+              </div>
 
-              <Link href="/subscriptions/new" onClick={() => { triggerHaptic("light"); setIsDrawerOpen(false) }}>
+              <div onClick={() => handleNavigateAndClose("/subscriptions/new", 'create')} className="cursor-pointer">
                 <div className="flex items-center gap-4 rounded-xl p-4 hover:bg-secondary/50 transition-colors">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400">
                     <Repeat className="h-5 w-5" />
                   </div>
                   <span className="font-medium text-base">Recurring invoice</span>
                 </div>
-              </Link>
+              </div>
 
-              <Link href="/clients" onClick={() => { triggerHaptic("light"); setIsDrawerOpen(false) }}>
+              <div onClick={() => handleNavigateAndClose("/clients", 'create')} className="cursor-pointer">
                 <div className="flex items-center gap-4 rounded-xl p-4 hover:bg-secondary/50 transition-colors">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400">
                     <Users className="h-5 w-5" />
                   </div>
                   <span className="font-medium text-base">Client</span>
                 </div>
-              </Link>
+              </div>
             </div>
           </DrawerContent>
         </Drawer>
@@ -210,11 +225,10 @@ export function BottomNav() {
             </DrawerHeader>
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 mt-4 overflow-y-auto px-2 pb-6">
               {moreNavItems.map((item) => (
-                <Link 
+                <div 
                   key={item.name} 
-                  href={item.href} 
-                  onClick={() => { triggerHaptic("light"); setIsMoreMenuOpen(false) }}
-                  className="flex flex-col items-center gap-2 group"
+                  onClick={() => handleNavigateAndClose(item.href, 'more')}
+                  className="flex flex-col items-center gap-2 group cursor-pointer"
                 >
                   <div className={cn(
                     "flex h-14 w-14 items-center justify-center rounded-[1.25rem] bg-gradient-to-br backdrop-blur-xl border shadow-[0_4px_12px_rgba(0,0,0,0.05)] group-hover:-translate-y-1 transition-all duration-300 relative overflow-hidden",
@@ -226,7 +240,7 @@ export function BottomNav() {
                   <span className={cn("text-xs font-semibold text-foreground transition-colors text-center leading-tight", item.textHover)}>
                     {item.name}
                   </span>
-                </Link>
+                </div>
               ))}
             </div>
           </DrawerContent>

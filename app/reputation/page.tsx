@@ -80,7 +80,7 @@ export default function ReputationPage() {
 
   return (
     <AppLayout 
-      mainClassName="bg-transparent"
+      mainClassName="bg-transparent !bg-top !bg-cover sm:!bg-center"
       mainStyle={{ backgroundImage: `url('${bgImage}')` }}
     >
       <div className="p-4 sm:p-6 md:p-10 max-w-6xl mx-auto space-y-8">
